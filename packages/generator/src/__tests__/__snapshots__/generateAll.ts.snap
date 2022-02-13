@@ -1,0 +1,113 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`generateAll should invoke generateModel for each model 1`] = `
+Object {
+  "client": Object {
+    "name": "ExampleClient.cs",
+    "text": "using Microsoft.EntityFrameworkCore;
+
+namespace ProcessingFramework {
+  public class ExampleClient: DbContext {
+    public DbSet<User> User { get; set; }
+    public DbSet<Post> Post { get; set; }
+    public DbSet<Comment> Comment { get; set; }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
+        optionsBuilder.UseNpgsql(@\\"Host=my_postgres_host.com;Database=initial_db;Username=user;Password=password;\\");
+    }
+  }
+}",
+  },
+  "models": Array [
+    Object {
+      "name": "User.cs",
+      "text": "using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace ProcessingFramework {
+  [Table(\\"user\\")]
+  public class User {
+    [Key]
+    [Required]
+    [Column(\\"id\\")]
+    public int id { get; set; }
+    [Required]
+    [Column(\\"email\\")]
+    public  string email { get; set; }
+    [Column(\\"name\\")]
+    public  string name { get; set; }
+    [Required]
+    [Column(\\"posts\\")]
+    public Post posts { get; set; }
+    [Required]
+    [Column(\\"comment\\")]
+    public Comment comment { get; set; }
+  }
+}",
+    },
+    Object {
+      "name": "Post.cs",
+      "text": "using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace ProcessingFramework {
+  [Table(\\"post\\")]
+  public class Post {
+    [Key]
+    [Required]
+    [Column(\\"id\\")]
+    public int id { get; set; }
+    [Required]
+    [Column(\\"content\\")]
+    public  string content { get; set; }
+    [Required]
+    [Column(\\"createdAt\\")]
+    public DateTime createdAt { get; set; }
+    [Required]
+    [ForeignKey(\\"createdBy\\")]
+    [Column(\\"creatorId\\")]
+    public int creatorId { get; set; }
+    [Required]
+    [Column(\\"createdBy\\")]
+    public User createdBy { get; set; }
+    [Required]
+    [Column(\\"comment\\")]
+    public Comment comment { get; set; }
+  }
+}",
+    },
+    Object {
+      "name": "Comment.cs",
+      "text": "using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace ProcessingFramework {
+  [Table(\\"comment\\")]
+  public class Comment {
+    [Key]
+    [Required]
+    [Column(\\"id\\")]
+    public int id { get; set; }
+    [Required]
+    [Column(\\"post\\")]
+    public Post post { get; set; }
+    [Required]
+    [Column(\\"creator\\")]
+    public User creator { get; set; }
+    [Required]
+    [ForeignKey(\\"post\\")]
+    [Column(\\"postId\\")]
+    public int postId { get; set; }
+    [Required]
+    [ForeignKey(\\"creator\\")]
+    [Column(\\"creatorId\\")]
+    public int creatorId { get; set; }
+  }
+}",
+    },
+  ],
+}
+`;

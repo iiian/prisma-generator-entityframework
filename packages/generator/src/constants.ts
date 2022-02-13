@@ -1,1 +1,1 @@
-export const GENERATOR_NAME = 'prisma-generator-entityframework'
+export const GENERATOR_NAME = 'prisma-generator-entityframework';

@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`generateDbContext should generate the source text for a client 1`] = `
+"using Microsoft.EntityFrameworkCore;
+
+namespace ProcessingFramework {
+  public class Data: DbContext {
+    public DbSet<User> User { get; set; }
+    public DbSet<Post> Post { get; set; }
+    public DbSet<Comment> Comment { get; set; }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
+        optionsBuilder.UseREGISTERED_DB_HOST_GOES_HERE(@\\"<CONNECTION-STRING-GOES-HERE>\\");
+    }
+  }
+}"
+`;

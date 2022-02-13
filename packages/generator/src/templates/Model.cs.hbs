@@ -1,0 +1,22 @@
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace {{namespace}} {
+  [Table("{{model.dbName}}")]
+  public class {{model.name}} {
+    {{#each model.fields}}
+    {{#if isId}}
+    [Key]
+    {{/if}}
+    {{#if isRequired}}
+    [Required]
+    {{/if}}
+    {{#isForeignKey . ../model/fields}}
+    [ForeignKey("{{getForeignKey .. ../../model/fields}}")]
+    {{/isForeignKey}}
+    [Column("{{name}}")]
+    public {{getCSType .}} {{name}} { get; set; }
+    {{/each}}
+  }
+}

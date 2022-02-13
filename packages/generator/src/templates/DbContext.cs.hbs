@@ -1,0 +1,13 @@
+using Microsoft.EntityFrameworkCore;
+
+namespace {{namespace}} {
+  public class {{clientClassName}}: DbContext {
+    {{#each models}}
+    public DbSet<{{name}}> {{name}} { get; set; }
+    {{/each}}
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
+        optionsBuilder.Use{{dbHost}}(@"{{{connectionString}}}");
+    }
+  }
+}

@@ -1,35 +1,42 @@
+generator cs {
+  provider        = "npx prisma-generator-entityframework"
+  output          = "../types"
+  namespace       = "MyNamespace"
+  clientClassName = "DataDbContext"
+}
+
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = "postgresql://user:password@my_postgres_host.com:5432/initial_db"
 }
 
 model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
+  id      Int       @id @default(autoincrement())
+  email   String    @unique
+  name    String?
+  posts   Post[]
+  comment Comment[]
+
+  @@map("user")
 }
 
-enum NotificationType {
-  newPosts
-  newComments
-  newFollowers
-  reply
-  heartOnPost
-  heartOnComment
-  heartOnReply
+model Post {
+  id        Int       @id @default(autoincrement())
+  content   String
+  createdAt DateTime  @map("created_at")
+  creatorId Int       @map("creator_id")
+  createdBy User      @relation(fields: [creatorId], references: [id])
+  comment   Comment[]
+
+  @@map("post")
 }
 
-enum Language {
-  Typescript
-  Javascript
-  Rust
-  Go
-  Python
-  Cpp
-}
+model Comment {
+  id        Int  @id @default(autoincrement())
+  post      Post @relation(fields: [postId], references: [id])
+  creator   User @relation(fields: [creatorId], references: [id])
+  postId    Int  @map("post_id")
+  creatorId Int  @map("creator_id")
 
-enum State {
-  Active
-  Pending
-  Banned
+  @@map("comment")
 }
