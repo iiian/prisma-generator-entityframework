@@ -14,4 +14,4 @@ describe('generateModel', () => {
     });
     expect(models).toMatchSnapshot();
   });
-});
+}); 

@@ -19,16 +19,25 @@ Handlebars.registerHelper('getForeignKey', (field: DMMF.Field, fields: DMMF.Fiel
   return fields.find(some => some.relationFromFields?.[0] === field.name)!.name;
 });
 
+Handlebars.registerHelper('isTruthy', function (value) {
+  return value !== undefined && value !== null;
+});
+
 Handlebars.registerHelper('getCSType', (field: DMMF.Field) => {
+  let type: string;
   switch (field.type) {
-    case 'Int': return 'int';
-    case 'BigInt': return 'long';
-    case 'Boolean': return 'bool';
+    case 'Int': type = 'int'; break;
+    case 'BigInt': type = 'long'; break;
+    case 'Boolean': type = 'bool'; break;
     case 'Decimal':
-    case 'Float': return 'float';
-    case 'String': return ' string';
+    case 'Float': type = 'float'; break;
+    case 'String': type = ' string'; break;
+    default: type = field.type as string; break;
   }
-  return field.type;
+  if (field.isList) {
+    type += '[]';
+  }
+  return type;
 });
 
 export function generateModel({ model, namespace }: GenerateModelParams): string {
