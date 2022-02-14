@@ -34,6 +34,7 @@ generatorHandler({
       namespace,
       connectionString: getConnectionString(options.datasources?.[0]),
       dbHost: getDbHost(options.datasources?.[0]),
+      schema_file_path: options.schemaPath,
       datamodel: options.dmmf.datamodel
     });
     logger.info(`Compiled.`);

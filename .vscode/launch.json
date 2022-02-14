@@ -20,19 +20,20 @@
       "internalConsoleOptions": "neverOpen"
     },
     {
-      "type": "pwa-node",
+      "name": "Debug Plugin",
+      "type": "node",
       "request": "launch",
-      "name": "Launch Program",
-      "skipFiles": [
-        "<node_internals>/**"
-      ],
       "args": [
-        "--brk-inspect"
+        "${workspaceRoot}/packages/generator/src/bin.ts"
       ],
-      "program": "${workspaceFolder}\\packages\\generator\\src\\generator.ts",
-      "outFiles": [
-        "${workspaceFolder}/**/*.js"
-      ]
+      "runtimeArgs": [
+        "--nolazy",
+        "-r",
+        "ts-node/register"
+      ],
+      "sourceMaps": true,
+      "cwd": "${workspaceRoot}/packages/generator",
+      "protocol": "inspector",
     }
   ]
 }

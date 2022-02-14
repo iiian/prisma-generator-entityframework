@@ -20,8 +20,8 @@
     "copy-templates:win32": "xcopy src\\templates dist\\templates /i /y",
     "copy-templates:default": "cp -rf src/templates dist/templates",
     "copy-readme": "run-script-os",
-    "copy-readme:win32": "copy ..\\..\\README.md dist\\README.md",
-    "copy-readme:default": "cp ../../README.md dist/README.md"
+    "copy-readme:win32": "copy ..\\..\\README.md README.md",
+    "copy-readme:default": "cp ../../README.md README.md"
   },
   "dependencies": {
     "@prisma/client": "3.7.0",
@@ -42,6 +42,7 @@
     "run-script-os": "^1.1.6",
     "semantic-release": "^18.0.1",
     "ts-jest": "27.1.2",
+    "ts-node": "^10.5.0",
     "typescript": "4.5.2"
   },
   "homepage": "https://github.com/iiian/prisma-generator-entityframework#readme",

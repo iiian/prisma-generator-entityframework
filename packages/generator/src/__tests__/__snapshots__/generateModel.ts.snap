@@ -37,11 +37,11 @@ namespace ProcessingFramework {
     [Column(\\"content\\")]
     public  string content { get; set; }
     [Required]
-    [Column(\\"createdAt\\")]
+    [Column(\\"created_at\\")]
     public DateTime createdAt { get; set; }
     [Required]
     [ForeignKey(\\"createdBy\\")]
-    [Column(\\"creatorId\\")]
+    [Column(\\"creator_id\\")]
     public int creatorId { get; set; }
     public User createdBy { get; set; }
     public Comment[] comment { get; set; }
@@ -62,11 +62,11 @@ namespace ProcessingFramework {
     public User creator { get; set; }
     [Required]
     [ForeignKey(\\"post\\")]
-    [Column(\\"postId\\")]
+    [Column(\\"post_id\\")]
     public int postId { get; set; }
     [Required]
     [ForeignKey(\\"creator\\")]
-    [Column(\\"creatorId\\")]
+    [Column(\\"creator_id\\")]
     public int creatorId { get; set; }
   }
 }",
