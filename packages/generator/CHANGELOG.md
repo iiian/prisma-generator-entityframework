@@ -1,3 +1,10 @@
+## [1.0.4](https://github.com/iiian/prisma-generator-entityframework/compare/v1.0.3...v1.0.4) (2022-02-14)
+
+
+### Bug Fixes
+
+* repair issue with misnamed db columns ([a0b31eb](https://github.com/iiian/prisma-generator-entityframework/commit/a0b31ebdcb9a72cc5eab79677a38c12977cef1a9))
+
 ## [1.0.3](https://github.com/iiian/prisma-generator-entityframework/compare/v1.0.2...v1.0.3) (2022-02-14)
 
 
