@@ -74,7 +74,6 @@ export function getConnectionString(datasource: DataSource): string {
 }
 
 export function getDbHost(datasource: DataSource): string {
-  logger.info(JSON.stringify(datasource));
   if (!datasource) {
     throw new Error('No datasource specified. I need a datasource in order to construct the DbContext. The DbContext will need to setup the connection in the `OnConfiguring` life cycle hook.');
   }

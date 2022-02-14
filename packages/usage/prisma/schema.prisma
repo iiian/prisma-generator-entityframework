@@ -1,6 +1,6 @@
 generator cs {
   provider        = "npx prisma-generator-entityframework"
-  output          = "../../../../docustream/ConsoleApp1/ConsoleApp1"
+  output          = "../output"
   namespace       = "DemoModule"
   clientClassName = "ClientDbContext"
 }
