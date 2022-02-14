@@ -20,8 +20,8 @@
     "copy-templates:win32": "xcopy src\\templates dist\\templates /i /y",
     "copy-templates:default": "cp -rf src/templates dist/templates",
     "copy-readme": "run-script-os",
-    "copy-readme:win32": "copy ..\\..\\README.md dist\\README.md",
-    "copy-readme:default": "cp ../../README.md dist/README.md"
+    "copy-readme:win32": "copy ..\\..\\README.md README.md",
+    "copy-readme:default": "cp ../../README.md README.md"
   },
   "dependencies": {
     "@prisma/client": "3.7.0",
