@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/iiian/prisma-generator-entityframework/compare/v1.0.2...v1.0.3) (2022-02-14)
+
+
+### Bug Fixes
+
+* removing README from dist ([58760e7](https://github.com/iiian/prisma-generator-entityframework/commit/58760e75464f024ecdd9ca5f9f34b8482cd47848))
+
 ## [1.0.2](https://github.com/iiian/prisma-generator-entityframework/compare/v1.0.1...v1.0.2) (2022-02-14)
 
 
