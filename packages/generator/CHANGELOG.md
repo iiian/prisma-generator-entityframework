@@ -1,3 +1,10 @@
+## [1.0.5](https://github.com/iiian/prisma-generator-entityframework/compare/v1.0.4...v1.0.5) (2022-02-14)
+
+
+### Bug Fixes
+
+* @[@map](https://github.com/map) attribute bug ([b83e824](https://github.com/iiian/prisma-generator-entityframework/commit/b83e8242ad64ad7e217f55612dbedf1247bda6a8))
+
 ## [1.0.4](https://github.com/iiian/prisma-generator-entityframework/compare/v1.0.3...v1.0.4) (2022-02-14)
 
 
