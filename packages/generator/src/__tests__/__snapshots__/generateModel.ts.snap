@@ -1,5 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`generateModel should generate Table names based on the @@map attribute or simply based on the model 1`] = `
+"using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Foo {
+  [Table(\\"NoAtAtMapAttribute\\")]
+  public class NoAtAtMapAttribute {
+    [Key]
+    [Required]
+    [Column(\\"id\\")]
+    public int id { get; set; }
+  }
+}"
+`;
+
 exports[`generateModel should generate the source text for a model 1`] = `
 Array [
   "using System;

@@ -1,9 +1,9 @@
-import { getSampleDMMF } from './__fixtures__/getSampleDMMF';
+import { getTestDMMF } from './__fixtures__/getTestDMMF';
 import { generateDbContext, GenerateDbContextParams } from '../helpers/generateDbContext';
 
 describe('generateDbContext', () => {
   it('should generate the source text for a client', async () => {
-    const { dmmf: sampleDMMF } = await getSampleDMMF();
+    const { dmmf: sampleDMMF } = await getTestDMMF();
     const args: GenerateDbContextParams = {
       clientClassName: 'Data',
       connectionString: '<CONNECTION-STRING-GOES-HERE>',

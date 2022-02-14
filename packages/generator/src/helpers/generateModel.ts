@@ -38,6 +38,10 @@ Handlebars.registerHelper('getDbField', function (field_name: string, model_name
   return db_field_name;
 });
 
+Handlebars.registerHelper('getDbName', (model: DMMF.Model) => {
+  return model.dbName ?? model.name;
+});
+
 Handlebars.registerHelper('getCSType', (field: DMMF.Field) => {
   let type: string;
   switch (field.type) {
