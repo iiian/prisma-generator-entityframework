@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/iiian/prisma-generator-entityframework/compare/v1.0.0...v1.0.1) (2022-02-14)
+
+
+### Bug Fixes
+
+* add readme to build artifacts ([88b4053](https://github.com/iiian/prisma-generator-entityframework/commit/88b4053a11ea555add81f9d063518fe31421e4df))
+
 # 1.0.0 (2022-02-14)
 
 
