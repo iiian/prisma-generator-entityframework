@@ -1,9 +1,9 @@
 import { generateModel, GenerateModelParams } from '../helpers/generateModel';
-import { getSampleDMMF } from './__fixtures__/getSampleDMMF';
+import { getTestDMMF } from './__fixtures__/getTestDMMF';
 
 describe('generateModel', () => {
   it('should generate the source text for a model', async () => {
-    const { dmmf: sampleDMMF, sample_prisma_schema_path } = await getSampleDMMF();
+    const { dmmf: sampleDMMF, sample_prisma_schema_path } = await getTestDMMF();
     const models = sampleDMMF.datamodel.models.map(model => {
       const args: GenerateModelParams = {
         namespace: 'ProcessingFramework',
@@ -17,5 +17,19 @@ describe('generateModel', () => {
     const shouldContainAnnotation =
       post_model!.search(/\[Column\(\"creator_id\"\)\]\s+public int creatorId \{ get\; set\; \}/);
     expect(shouldContainAnnotation).not.toBe(-1);
+  });
+
+  it('should generate Table names based on the @@map attribute or simply based on the model', async () => {
+    const { dmmf: sampleDMMF, sample_prisma_schema_path } = await getTestDMMF('no-map-attribute');
+    const [model] = sampleDMMF.datamodel.models.map(model => {
+      const args: GenerateModelParams = {
+        namespace: 'Foo',
+        schema_file_path: sample_prisma_schema_path,
+        model
+      };
+      return generateModel(args);
+    });
+    expect(model).toMatchSnapshot();
+    expect(model!.search(/\[Table\(\"NoAtAtMapAttribute\"\)\]\s+public class NoAtAtMapAttribute/)).not.toBe(-1);
   });
 }); 
