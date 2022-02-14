@@ -13,12 +13,15 @@
   "scripts": {
     "start": "node dist/bin.js",
     "dev": "npx tsc -w",
-    "build": "tsc && npm run copy-templates",
+    "build": "tsc && npm run copy-templates && npm run copy-readme",
     "prepack": "yarn build",
     "test": "jest",
     "copy-templates": "run-script-os",
     "copy-templates:win32": "xcopy src\\templates dist\\templates /i /y",
-    "copy-templates:default": "cp -rf src/templates dist/templates"
+    "copy-templates:default": "cp -rf src/templates dist/templates",
+    "copy-readme": "run-script-os",
+    "copy-readme:win32": "copy ..\\..\\README.md dist\\README.md",
+    "copy-readme:default": "cp ../../README.md dist/README.md"
   },
   "dependencies": {
     "@prisma/client": "3.7.0",
