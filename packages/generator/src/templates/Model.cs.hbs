@@ -6,6 +6,7 @@ namespace {{namespace}} {
   [Table("{{model.dbName}}")]
   public class {{model.name}} {
     {{#each model.fields}}
+    {{#unless (isTruthy relationName)}}
     {{#if isId}}
     [Key]
     {{/if}}
@@ -16,6 +17,7 @@ namespace {{namespace}} {
     [ForeignKey("{{getForeignKey .. ../../model/fields}}")]
     {{/isForeignKey}}
     [Column("{{name}}")]
+    {{/unless}}
     public {{getCSType .}} {{name}} { get; set; }
     {{/each}}
   }

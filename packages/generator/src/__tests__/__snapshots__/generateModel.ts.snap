@@ -18,12 +18,8 @@ namespace ProcessingFramework {
     public  string email { get; set; }
     [Column(\\"name\\")]
     public  string name { get; set; }
-    [Required]
-    [Column(\\"posts\\")]
-    public Post posts { get; set; }
-    [Required]
-    [Column(\\"comment\\")]
-    public Comment comment { get; set; }
+    public Post[] posts { get; set; }
+    public Comment[] comment { get; set; }
   }
 }",
   "using System;
@@ -47,12 +43,8 @@ namespace ProcessingFramework {
     [ForeignKey(\\"createdBy\\")]
     [Column(\\"creatorId\\")]
     public int creatorId { get; set; }
-    [Required]
-    [Column(\\"createdBy\\")]
     public User createdBy { get; set; }
-    [Required]
-    [Column(\\"comment\\")]
-    public Comment comment { get; set; }
+    public Comment[] comment { get; set; }
   }
 }",
   "using System;
@@ -66,11 +58,7 @@ namespace ProcessingFramework {
     [Required]
     [Column(\\"id\\")]
     public int id { get; set; }
-    [Required]
-    [Column(\\"post\\")]
     public Post post { get; set; }
-    [Required]
-    [Column(\\"creator\\")]
     public User creator { get; set; }
     [Required]
     [ForeignKey(\\"post\\")]
