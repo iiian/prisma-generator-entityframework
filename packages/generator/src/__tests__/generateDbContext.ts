@@ -3,7 +3,7 @@ import { generateDbContext, GenerateDbContextParams } from '../helpers/generateD
 
 describe('generateDbContext', () => {
   it('should generate the source text for a client', async () => {
-    const sampleDMMF = await getSampleDMMF();
+    const { dmmf: sampleDMMF } = await getSampleDMMF();
     const args: GenerateDbContextParams = {
       clientClassName: 'Data',
       connectionString: '<CONNECTION-STRING-GOES-HERE>',

@@ -16,7 +16,7 @@ namespace {{namespace}} {
     {{#isForeignKey . ../model/fields}}
     [ForeignKey("{{getForeignKey .. ../../model/fields}}")]
     {{/isForeignKey}}
-    [Column("{{name}}")]
+    [Column("{{getDbField name ../model.name ../raw_schema_lines}}")]
     {{/unless}}
     public {{getCSType .}} {{name}} { get; set; }
     {{/each}}
