@@ -1,13 +1,13 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SqliteTest;
+using SqlServerTest;
 using System.Linq;
 
 namespace unit_tests {
   [TestClass]
-  public class SqliteTests {
+  public class SqlServerTests {
     [TestMethod]
     public void it_should_be_able_create_read_and_delete() {
-      SqliteClient client = new SqliteClient();
+      SqlServerClient client = new SqlServerClient();
       client.User.Add(new User {
         name = "Don Jones",
         email = "don.jones@gmail.com"
@@ -21,7 +21,7 @@ namespace unit_tests {
 
     [TestMethod]
     public void it_should_be_able_create_relational_graphs_with_cascading_deletions() {
-      var client = new SqliteClient();
+      var client = new SqlServerClient();
       var user = client.User.Add(new User {
         name = "John Doe",
         email = "john.doe@gmail.com",
@@ -43,7 +43,7 @@ namespace unit_tests {
 
     [TestMethod]
     public void it_should_be_able_to_update() {
-      SqliteClient client = new SqliteClient();
+      SqlServerClient client = new SqlServerClient();
       var donJonesUser = client.User.Add(new User {
         name = "Don Jones",
         email = "don.jones@gmail.com"

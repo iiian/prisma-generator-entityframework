@@ -5,10 +5,12 @@
   "main": "src/app.js",
   "license": "MIT",
   "scripts": {
-    "migrate-sqlite-tests": "npx prisma migrate dev --schema=prisma/schema.sqlite.prisma && npm run copy-sqlite-db",
+    "migrate-tests": "npm run migrate-sqlserver-tests && npm run migrate-sqlite-tests",
+    "migrate-sqlserver-tests": "npx prisma migrate dev --schema=sqlserver/schema.prisma --name=sqlserver-init",
+    "migrate-sqlite-tests": "npx prisma migrate dev --schema=sqlite/schema.prisma --name=sqlite-init && npm run copy-sqlite-db",
     "copy-sqlite-db": "run-script-os",
-    "copy-sqlite-db:windows": "xcopy prisma\\test.db* csharp-integration-tests\\unit-tests\\* /i /y",
-    "copy-sqlite-db:default": "cp prisma/test.db* csharp-integration-tests/unit-tests/*"
+    "copy-sqlite-db:windows": "xcopy sqlite\\test.db* csharp-integration-tests\\unit-tests\\* /i /y",
+    "copy-sqlite-db:default": "cp sqlite/test.db* csharp-integration-tests/unit-tests/*"
   },
   "dependencies": {
     "@prisma/client": "3.7.0"
