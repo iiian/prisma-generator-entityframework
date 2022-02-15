@@ -1,3 +1,10 @@
+## [1.0.7](https://github.com/iiian/prisma-generator-entityframework/compare/v1.0.6...v1.0.7) (2022-02-15)
+
+
+### Bug Fixes
+
+* replace array types with icollection ([5a74850](https://github.com/iiian/prisma-generator-entityframework/commit/5a748507658b269698af72e68cc4a56fa559fc45))
+
 ## [1.0.6](https://github.com/iiian/prisma-generator-entityframework/compare/v1.0.5...v1.0.6) (2022-02-15)
 
 
