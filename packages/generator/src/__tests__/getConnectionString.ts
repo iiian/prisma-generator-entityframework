@@ -61,4 +61,19 @@ describe('getConnectionString', () => {
       expect(connection_string).toMatchSnapshot();
     });
   });
+  describe('given a sqlserver database connector, with integrated security', () => {
+    it('should transform the connection string', () => {
+      const connection_string = getConnectionString({
+        activeProvider: 'sqlserver',
+        config: {},
+        name: '',
+        provider: 'sqlserver',
+        url: {
+          fromEnvVar: null,
+          value: 'sqlserver://localhost;Initial Catalog=master;Integrated Security=true'
+        }
+      });
+      expect(connection_string).toMatchSnapshot();
+    });
+  });
 });
