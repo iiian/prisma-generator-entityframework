@@ -37,8 +37,8 @@ namespace ProcessingFramework {
     public  string email { get; set; }
     [Column(\\"name\\")]
     public  string name { get; set; }
-    public Post[] posts { get; set; }
-    public Comment[] comment { get; set; }
+    public ICollection<Post> posts { get; set; }
+    public ICollection<Comment> comment { get; set; }
   }
 }",
     },
@@ -66,7 +66,7 @@ namespace ProcessingFramework {
     [Column(\\"creator_id\\")]
     public int creatorId { get; set; }
     public User createdBy { get; set; }
-    public Comment[] comment { get; set; }
+    public ICollection<Comment> comment { get; set; }
   }
 }",
     },
