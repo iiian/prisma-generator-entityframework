@@ -22,13 +22,21 @@ export function getConnectionString(datasource: DataSource): string {
 }
 
 function getMysqlOrPostgresqlConnectionString(datasource: DataSource): string {
-  const conn_str_fmt: RegExp = /\w+:\/\/((?<user>.*)\:(?<password>.*)@)?(?<host>.*)\:(?<port>\d{4,5})(\/(?<initial_db>.*))?/;
+  const conn_str_fmt: RegExp = /\w+:\/\/((?<user>[\w_\d\s]+)(\:(?<password>.*))?@)?(?<host>.*)\:(?<port>\d{4,5})(\/(?<initial_db>.*))?/;
   const raw_conn_str = getUrl(datasource);
   const matches = conn_str_fmt.exec(raw_conn_str);
   if (!matches) {
     throw new Error(`Connection string could not be parsed: ${raw_conn_str}`);
   }
-  return `Host=${matches!.groups!.host!};Database=${matches!.groups!.initial_db!};Username=${matches!.groups!.user!};Password=${matches!.groups!.password!}`;
+  let conn_str = `Host=${matches!.groups!.host!};Database=${matches!.groups!.initial_db!};`;
+  if (matches!.groups!.user) {
+    conn_str += `Username=${matches!.groups!.user!};`;
+  }
+  if (matches!.groups!.password) {
+    conn_str += `Password=${matches!.groups!.password!};`;
+  }
+
+  return conn_str;
 }
 
 function getSqliteConnectionString(datasource: DataSource): string {

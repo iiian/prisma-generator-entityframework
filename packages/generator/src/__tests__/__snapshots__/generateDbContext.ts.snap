@@ -1,9 +1,26 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`generateDbContext given a mysql db should generate the source text for a mysqlclient 1`] = `
+"using Microsoft.EntityFrameworkCore;
+
+namespace Namespace {
+  public class Data: DbContext {
+    public DbSet<User> User { get; set; }
+    public DbSet<Post> Post { get; set; }
+    public DbSet<Comment> Comment { get; set; }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
+        var connection_string = @\\"<CONNECTION-STRING-GOES-HERE>\\";
+        optionsBuilder.UseMySql(connection_string, ServerVersion.AutoDetect(connection_string));
+    }
+  }
+}"
+`;
+
 exports[`generateDbContext should generate the source text for a client 1`] = `
 "using Microsoft.EntityFrameworkCore;
 
-namespace ProcessingFramework {
+namespace Namespace {
   public class Data: DbContext {
     public DbSet<User> User { get; set; }
     public DbSet<Post> Post { get; set; }

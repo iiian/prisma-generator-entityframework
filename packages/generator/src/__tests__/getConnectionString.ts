@@ -46,6 +46,21 @@ describe('getConnectionString', () => {
       expect(connection_string).toMatchSnapshot();
     });
   });
+  describe('given a mysql database connector', () => {
+    it('should transform the connection string', () => {
+      const connection_string = getConnectionString({
+        activeProvider: 'mysql',
+        config: {},
+        name: '',
+        provider: 'mysql',
+        url: {
+          fromEnvVar: null,
+          value: 'mysql://user@host:5432/initial_db'
+        }
+      });
+      expect(connection_string).toMatchSnapshot();
+    });
+  });
   describe('given a sqlserver database connector', () => {
     it('should transform the connection string', () => {
       const connection_string = getConnectionString({
