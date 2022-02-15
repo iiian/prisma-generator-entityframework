@@ -5,7 +5,8 @@
   "main": "src/app.js",
   "license": "MIT",
   "scripts": {
-    "migrate-tests": "npm run migrate-sqlserver-tests && npm run migrate-sqlite-tests",
+    "migrate-tests": "npm run migrate-postgres-tests && npm run migrate-sqlserver-tests && npm run migrate-sqlite-tests",
+    "migrate-postgres-tests": "npx prisma migrate dev --schema=postgres/schema.prisma --name=postgres-init",
     "migrate-sqlserver-tests": "npx prisma migrate dev --schema=sqlserver/schema.prisma --name=sqlserver-init",
     "migrate-sqlite-tests": "npx prisma migrate dev --schema=sqlite/schema.prisma --name=sqlite-init && npm run copy-sqlite-db",
     "copy-sqlite-db": "run-script-os",
