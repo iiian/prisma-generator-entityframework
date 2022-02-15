@@ -1,8 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`getConnectionString given a mysql database connector should transform the connection string 1`] = `"Host=host;Database=initial_db;Username=user;Password=password"`;
+exports[`getConnectionString given a mysql database connector should transform the connection string 1`] = `"Host=host;Database=initial_db;Username=user;Password=password;"`;
 
-exports[`getConnectionString given a postgresql database connector should transform the connection string 1`] = `"Host=host;Database=initial_db;Username=user;Password=password"`;
+exports[`getConnectionString given a mysql database connector should transform the connection string 2`] = `"Host=host;Database=initial_db;Username=user;"`;
+
+exports[`getConnectionString given a postgresql database connector should transform the connection string 1`] = `"Host=host;Database=initial_db;Username=user;Password=password;"`;
 
 exports[`getConnectionString given a sqlite3 database connector should transform the connection string 1`] = `"Data Source=./test.db;"`;
 
