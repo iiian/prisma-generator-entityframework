@@ -54,7 +54,7 @@ Handlebars.registerHelper('getCSType', (field: DMMF.Field) => {
     default: type = field.type as string; break;
   }
   if (field.isList) {
-    type += '[]';
+    type = `ICollection<${type}>`;
   }
   return type;
 });

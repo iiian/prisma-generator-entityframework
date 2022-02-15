@@ -1,3 +1,10 @@
+## [1.0.6](https://github.com/iiian/prisma-generator-entityframework/compare/v1.0.5...v1.0.6) (2022-02-15)
+
+
+### Bug Fixes
+
+* repair crash on sqlite/mysql/sqlserver connection strings ([77cb2b9](https://github.com/iiian/prisma-generator-entityframework/commit/77cb2b9e5291c47c736aa78b705f6415fa0aea59))
+
 ## [1.0.5](https://github.com/iiian/prisma-generator-entityframework/compare/v1.0.4...v1.0.5) (2022-02-14)
 
 
