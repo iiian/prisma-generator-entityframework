@@ -68,6 +68,17 @@ importers:
       prisma-generator-entityframework: link:../generator
       typescript: 4.5.2
 
+  packages/usage/csharp-test-project:
+    specifiers:
+      '@prisma/client': ^3.9.2
+      prisma: ^3.9.2
+      prisma-generator-entityframework: workspace:*
+    dependencies:
+      '@prisma/client': 3.9.2_prisma@3.9.2
+    devDependencies:
+      prisma: 3.9.2
+      prisma-generator-entityframework: link:../../generator
+
 packages:
 
   /@ampproject/remapping/2.1.1:
@@ -930,6 +941,20 @@ packages:
       prisma: 3.7.0
     dev: false
 
+  /@prisma/client/3.9.2_prisma@3.9.2:
+    resolution: {integrity: sha512-VlEIYVMyfFZHbVBOlunPl47gmP/Z0zzPjPj8I7uKEIaABqrUy50ru3XS0aZd8GFvevVwt7p91xxkUjNjrWhKAQ==}
+    engines: {node: '>=12.6'}
+    requiresBuild: true
+    peerDependencies:
+      prisma: '*'
+    peerDependenciesMeta:
+      prisma:
+        optional: true
+    dependencies:
+      '@prisma/engines-version': 3.9.0-58.bcc2ff906db47790ee902e7bbc76d7ffb1893009
+      prisma: 3.9.2
+    dev: false
+
   /@prisma/debug/3.6.0:
     resolution: {integrity: sha512-THh5YjfDCpvbU5NOfeGx7mOQZl8EADOZ1z3C0sEDYmYUnpBjmCrnLNRSMjmD1d9kDo5GgwkrbK9pnwonHiH0JQ==}
     dependencies:
@@ -965,9 +990,18 @@ packages:
     resolution: {integrity: sha512-+qx2b+HK7BKF4VCa0LZ/t1QCXsu6SmvhUQyJkOD2aPpmOzket4fEnSKQZSB0i5tl7rwCDsvAiSeK8o7rf+yvwg==}
     dev: false
 
+  /@prisma/engines-version/3.9.0-58.bcc2ff906db47790ee902e7bbc76d7ffb1893009:
+    resolution: {integrity: sha512-5Dh+qTDhpPR66w6NNAnPs+/W/Qt4r1DSd+qhfPFcDThUK4uxoZKGlPb2IYQn5LL+18aIGnmteDf7BnVMmvBNSQ==}
+    dev: false
+
   /@prisma/engines/3.7.0-31.8746e055198f517658c08a0c426c7eec87f5a85f:
     resolution: {integrity: sha512-W549ub5NlgexNhR8EFstA/UwAWq3Zq0w9aNkraqsozVCt2CsX+lK4TK7IW5OZVSnxHwRjrgEAt3r9yPy8nZQRg==}
     requiresBuild: true
+
+  /@prisma/engines/3.9.0-58.bcc2ff906db47790ee902e7bbc76d7ffb1893009:
+    resolution: {integrity: sha512-qM+uJbkelB21bnK44gYE049YTHIjHysOuj0mj5U2gDGyNLfmiazlggzFPCgEjgme4U5YB2tYs6Z5Hq08Kl8pjA==}
+    requiresBuild: true
+    dev: true
 
   /@prisma/fetch-engine/3.7.0-31.8746e055198f517658c08a0c426c7eec87f5a85f:
     resolution: {integrity: sha512-nMIHNLvzaNQ/++ug0aODYQ8CtcZJraS2gtZQypuqSLMOxXtyF5bCGH0n6Q4jWHHjgzuelPFzqzEPmL5WrRaO5A==}
@@ -4064,6 +4098,15 @@ packages:
     requiresBuild: true
     dependencies:
       '@prisma/engines': 3.7.0-31.8746e055198f517658c08a0c426c7eec87f5a85f
+    dev: true
+
+  /prisma/3.9.2:
+    resolution: {integrity: sha512-i9eK6cexV74OgeWaH3+e6S07kvC9jEZTl6BqtBH398nlCU0tck7mE9dicY6YQd+euvMjjCtY89q4NgmaPnUsSg==}
+    engines: {node: '>=12.6'}
+    hasBin: true
+    requiresBuild: true
+    dependencies:
+      '@prisma/engines': 3.9.0-58.bcc2ff906db47790ee902e7bbc76d7ffb1893009
     dev: true
 
   /process-nextick-args/2.0.1:
