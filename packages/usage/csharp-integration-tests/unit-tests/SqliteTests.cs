@@ -6,19 +6,21 @@ namespace unit_tests {
   [TestClass]
   public class SqliteTests {
     [TestMethod]
-    public void it_should_be_able_create() {
-      var client = new SqliteClient();
+    public void it_should_be_able_create_read_and_delete() {
+      SqliteClient client = new SqliteClient();
       client.User.Add(new User {
         name = "Don Jones",
         email = "don.jones@gmail.com"
       });
       client.SaveChanges();
-
       Assert.AreEqual("don.jones@gmail.com", client.User.First(user => user.name == "Don Jones").email);
+      client.User.Remove(client.User.First(user => user.name == "Don Jones"));
+      client.SaveChanges();
+      Assert.AreEqual(client.User.Count(), 0);
     }
 
     [TestMethod]
-    public void it_should_be_able_create_relational_graphs() {
+    public void it_should_be_able_create_relational_graphs_with_cascading_deletions() {
       var client = new SqliteClient();
       var user = client.User.Add(new User {
         name = "John Doe",
@@ -32,6 +34,26 @@ namespace unit_tests {
       client.SaveChanges();
 
       Assert.AreEqual("John Doe", client.Post.First(post => post.creatorId == user.Entity.id).createdBy.name);
+
+      client.User.Remove(user.Entity);
+      client.SaveChanges();
+
+      Assert.AreEqual(client.Post.Count(), 0);
+    }
+
+    [TestMethod]
+    public void it_should_be_able_to_update() {
+      SqliteClient client = new SqliteClient();
+      var donJonesUser = client.User.Add(new User {
+        name = "Don Jones",
+        email = "don.jones@gmail.com"
+      });
+      client.SaveChanges();
+      Assert.AreEqual("don.jones@gmail.com", client.User.First(user => user.name == "Don Jones").email);
+      donJonesUser.Entity.email = "don.jones42@gmail.com";
+      client.SaveChanges();
+      Assert.IsTrue(client.User.Any(user => user.name == "Don Jones"));
+      Assert.IsFalse(client.User.Any(user => user.email == "don.jones@gmail.com"));
     }
   }
 }

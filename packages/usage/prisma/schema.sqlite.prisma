@@ -7,7 +7,7 @@ generator cs {
 
 datasource db {
   provider = "sqlite"
-  url      = "file:../test.db"
+  url      = "file:test.db"
 }
 
 model User {
@@ -25,7 +25,7 @@ model Post {
   content   String
   createdAt DateTime  @map("created_at")
   creatorId Int       @map("creator_id")
-  createdBy User      @relation(fields: [creatorId], references: [id])
+  createdBy User      @relation(fields: [creatorId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   comment   Comment[]
 
   @@map("post")

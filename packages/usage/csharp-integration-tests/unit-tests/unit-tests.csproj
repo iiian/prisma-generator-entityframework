@@ -24,6 +24,9 @@
     <None Update="test.db">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="test.db-journal">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
