@@ -63,6 +63,17 @@ Console.WriteLine(context.User.Where(user => user.name == "John Doe").First().em
 // john.doe@gmail.com
 ```
 
+## Configuration
+
+Configuration is as simple as providing values for these four properties:
+
+| Property          | Type                                     | Description |
+|-------------------|------------------------------------------|-------------|
+| `provider`        | `"npx prisma-generator-entityframework"` | Tell `prisma` you want to use this generator.
+| `output`          | `string`: relative or absolute path      | Tell `prisma` where you want the source code to be dumped to.
+| `namespace`       | `string`                                 | Tell `prisma-generator-entityframework` what namespace to stick your client and model code in.
+| `clientClassName` | `string`                                 | Tell `prisma-generator-entityframework` what to name your `DbContext` subclass.
+
 ## Compatibility
 
 ### .NET support
@@ -92,7 +103,7 @@ For more information on Prisma-supported database connectors, visit the [Prisma 
 
 ## Feature support
 
-Below is the list of features. It's a good reference for whether or not a schema will be able map without concern. Drop an issue if your feature isn't complete and you'd really like it to be.
+The following table tracks feature availability. It's a good reference for verifying whether your schema will output with the information you need. Drop an issue if you'd like to see a specific feature prioritizied.
 
 | Feature                       | Supported | Description 
 |-------------------------------|-----------|--------------------------------------------------------------------------------------------------------------------------------------------------
