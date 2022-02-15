@@ -9,5 +9,5 @@ packages/generator/README.md
 packages/usage/csharp-integration-tests/**/bin
 **/test.db*
 packages/usage/csharp-integration-tests/**/model
-packages/usage/csharp/integration/tests/.vs
+packages/usage/csharp/integration-tests/.vs/
 packages/usage/prisma/migrations
