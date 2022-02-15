@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/iiian/prisma-generator-entityframework/compare/v1.0.7...v1.1.0) (2022-02-15)
+
+
+### Features
+
+* support sqlserver integrated security ([77100e9](https://github.com/iiian/prisma-generator-entityframework/commit/77100e995be56e2315575be0913b5416f52e26df))
+
 ## [1.0.7](https://github.com/iiian/prisma-generator-entityframework/compare/v1.0.6...v1.0.7) (2022-02-15)
 
 
