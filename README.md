@@ -90,12 +90,14 @@ Right now, the primary target is .NET core, version 5.0 and later. If ~~enough~~
 
 | Prisma connector  | Supported | .NET core provider mapping                                                                                         |
 |-------------------|-----------|--------------------------------------------------------------------------------------------------------------------|
-| sqlserver         | ✔️        | [Microsoft.EntityFrameworkCore.SqlServer](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.SqlServer/) |
 | postgres          | ✔️        | [Npgsql.EntityFrameworkCore.PostgreSQL](https://www.nuget.org/packages/Npgsql.EntityFrameworkCore.PostgreSQL/)     |
 | mysql             | ✔️        | [Pomelo.EntityFrameworkCore.MySql](https://www.nuget.org/packages/Pomelo.EntityFrameworkCore.MySql/)               |
 | sqlite            | ✔️        | [Microsoft.EntityFrameworkCore.Sqlite](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Sqlite/)       |
+| sqlserver         | ✔️ *      | [Microsoft.EntityFrameworkCore.SqlServer](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.SqlServer/) |
 | cockroachdb       | ❌        | -                                                                                                                  |
 | mongodb           | ❌        | -                                                                                                                  |
+
+> _* The prisma sql server connection string is [quite configurable](https://www.prisma.io/docs/concepts/database-connectors/sql-server#connection-details). For the time being, I'm just focused on supporting the basic SQL-based authentication w/ TLS support._
 
 For more information on EntityFramework database provider support, visit the [DbContext configuration guide](https://docs.microsoft.com/en-us/ef/core/dbcontext-configuration/).
 

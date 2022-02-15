@@ -14,3 +14,4 @@ describe('generateDbContext', () => {
     expect(generateDbContext(args)).toMatchSnapshot();
   });
 });
+
