@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/iiian/prisma-generator-entityframework/compare/v1.1.0...v1.1.1) (2022-02-15)
+
+
+### Bug Fixes
+
+* repair broken configuration steps for mysql integration ([5969ac6](https://github.com/iiian/prisma-generator-entityframework/commit/5969ac62d7df4e321a6c7abe50a22b96675b05ff))
+
 # [1.1.0](https://github.com/iiian/prisma-generator-entityframework/compare/v1.0.7...v1.1.0) (2022-02-15)
 
 
