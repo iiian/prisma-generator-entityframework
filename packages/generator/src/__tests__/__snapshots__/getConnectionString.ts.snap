@@ -6,4 +6,4 @@ exports[`getConnectionString given a postgresql database connector should transf
 
 exports[`getConnectionString given a sqlite3 database connector should transform the connection string 1`] = `"Data Source=./test.db;"`;
 
-exports[`getConnectionString given a sqlserver database connector should transform the connection string 1`] = `"Host=host:5432;Database=initial_db;Username=user;Password=password;Encrypt=true"`;
+exports[`getConnectionString given a sqlserver database connector should transform the connection string 1`] = `"Host=host:5432;Database=initial_db;Username=user;Password=password;Encrypt=true;"`;

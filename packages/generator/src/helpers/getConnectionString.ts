@@ -1,6 +1,7 @@
 import { DataSource } from '@prisma/generator-helper';
 import { logger } from '@prisma/sdk';
 import { join } from 'path';
+import { getSqlServerConnectionString } from './getSqlServerConnectionString';
 
 export function getConnectionString(datasource: DataSource): string {
   if (!datasource) {
@@ -40,17 +41,7 @@ function getSqliteConnectionString(datasource: DataSource): string {
   return `Data Source=${matches!.groups!.db_path!};`;
 }
 
-function getSqlServerConnectionString(datasource: DataSource): string {
-  const host_fmt: RegExp = /^sqlserver:\/\/(?<host>.*)(\:(?<port>\d{4,5}))?\;(database|Database|DATABASE)\=(?<initial_db>.*)\;(user|User|USER)\=(?<user>.*)\;(password|Password|PASSWORD)\=(?<password>.*)\;(encrypt|Encrypt|ENCRYPT)\=(?<encrypted>(true|false))(\;)?$/;
-  const raw_conn_str = getUrl(datasource);
-  const matches = host_fmt.exec(raw_conn_str);
-  if (!matches) {
-    throw new Error(`Connection string could not be parsed: ${raw_conn_str}`);
-  }
-  return `Host=${matches!.groups!.host!};Database=${matches!.groups!.initial_db!};Username=${matches!.groups!.user!};Password=${matches!.groups!.password!};Encrypt=${matches!.groups!.encrypted!}`;
-}
-
-function getUrl(datasource: DataSource): string {
+export function getUrl(datasource: DataSource): string {
   return (datasource.url.fromEnvVar)
     ? process.env[datasource.url.fromEnvVar]!
     : datasource.url.value
