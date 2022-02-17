@@ -1,3 +1,10 @@
+## [1.1.2](https://github.com/iiian/prisma-generator-entityframework/compare/v1.1.1...v1.1.2) (2022-02-17)
+
+
+### Bug Fixes
+
+* repair support for sqlserver with sql auth ([b1a783f](https://github.com/iiian/prisma-generator-entityframework/commit/b1a783fd6228fd23e56765ec83b12d9247a12466))
+
 ## [1.1.1](https://github.com/iiian/prisma-generator-entityframework/compare/v1.1.0...v1.1.1) (2022-02-15)
 
 
