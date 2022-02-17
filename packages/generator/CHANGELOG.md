@@ -1,3 +1,15 @@
+# [1.2.0](https://github.com/iiian/prisma-generator-entityframework/compare/v1.1.2...v1.2.0) (2022-02-17)
+
+
+### Bug Fixes
+
+* repair deprecated misuse of multi-annotating key ([0c7fd14](https://github.com/iiian/prisma-generator-entityframework/commit/0c7fd14db9c8661e11ba9265e6a65a9454c4bbf8))
+
+
+### Features
+
+* introduce multi-field primary-key support ([ee0c35d](https://github.com/iiian/prisma-generator-entityframework/commit/ee0c35db39b26dcae4f29f1f9371728735d347e8))
+
 ## [1.1.2](https://github.com/iiian/prisma-generator-entityframework/compare/v1.1.1...v1.1.2) (2022-02-17)
 
 
