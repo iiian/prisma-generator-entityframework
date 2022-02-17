@@ -7,9 +7,6 @@ namespace {{namespace}} {
   public class {{model.name}} {
     {{#each model.fields}}
     {{#unless (isTruthy relationName)}}
-    {{#if isRequired}}
-    [Required]
-    {{/if}}
     {{#isForeignKey . ../model/fields}}
     [ForeignKey("{{getForeignKey .. ../../model/fields}}")]
     {{/isForeignKey}}

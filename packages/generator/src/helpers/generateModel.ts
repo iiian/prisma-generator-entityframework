@@ -46,18 +46,13 @@ Handlebars.registerHelper('getCSType', (field: DMMF.Field) => {
 });
 
 Handlebars.registerHelper('getColumnAnnotation', (field: DMMF.Field, model: DMMF.Model, raw_schema_lines: string[]) => {
-  const order = getOrderIndex(field, model);
-  const field_name = getDbField(field.name, model.name, raw_schema_lines);
-  const is_primary_key = isPrimaryKey(field, model);
-  const key_annotation_prefix = (is_primary_key && 'Key, ') || '';
-  if (order < 0 && !field_name) {
-    return `[${key_annotation_prefix}Column]`;
-  }
-  if (field_name) {
-    return `[${key_annotation_prefix}Column("${field_name}")]`;
-  }
-  const field_name_string = field_name && `"${field_name}", ` || '';
-  return `[Key, Column(${field_name_string}Order=${order})]`;
+  const field_name = getMappedFieldName(field.name, model.name, raw_schema_lines);
+  const key = isPrimaryKey(field, model) && 'Key';
+  const required = field.isRequired && 'Required';
+  const column_parameter_list = (field_name && `("${field_name}")` || '');
+  const column = `Column${column_parameter_list}`;
+
+  return `[${[key, required, column].filter(Boolean).join(', ')}]`;
 });
 
 function isPrimaryKey(field: DMMF.Field, model: DMMF.Model) {
@@ -71,7 +66,7 @@ function isPrimaryKey(field: DMMF.Field, model: DMMF.Model) {
   return index >= 0;
 }
 
-function getDbField(field_name: string, model_name: string, raw_schema_lines: string[]) {
+function getMappedFieldName(field_name: string, model_name: string, raw_schema_lines: string[]) {
   // required in order to differentiate fields w/ the same name on different models, which _could_ in theory be mapped to different
   // field names on the db side.
   const model_line_start = raw_schema_lines.findIndex(line => line.includes(`model ${model_name}`));
@@ -83,19 +78,6 @@ function getDbField(field_name: string, model_name: string, raw_schema_lines: st
   const db_field_name = /\@map\(\"(?<db_field_name>.*)\"\)/.exec(line)?.groups?.db_field_name ?? null;
 
   return db_field_name;
-}
-
-function getOrderIndex(field: DMMF.Field, model: DMMF.Model): number {
-  if (!model.primaryKey?.fields) {
-    return -1;
-  }
-  const { fields } = model.primaryKey;
-  const index = fields.findIndex(each_primary_key => each_primary_key === field.name);
-  if (index < 0) {
-    return -1;
-  }
-  // this is dependent on us always outputting the "ColumnId" in the [Column] annotation
-  return index;
 }
 
 export function generateModel({ model, namespace, schema_file_path }: GenerateModelParams): string {

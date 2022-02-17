@@ -19,6 +19,23 @@ Handlebars.registerHelper('onConfiguringBody', (params: GenerateDbContextParams)
         optionsBuilder.Use${params.dbHost}(connection_string, ServerVersion.AutoDetect(connection_string));`;
 });
 
+Handlebars.registerHelper('getOnModelCreatingMethod', (params: GenerateDbContextParams) => {
+  const primary_key_entities = params.models
+    .filter(model => model.primaryKey?.fields)
+    .map(model => ({ model, fields: model.primaryKey!.fields }));
+
+  if (!primary_key_entities.length) {
+    return '';
+  }
+
+  return `
+    protected override void OnModelCreating(ModelBuilder modelBuilder) {
+      ${primary_key_entities.map(entity => `modelBuilder.Entity<${entity.model.name}>()
+        .HasKey(e => new { ${entity.fields.map(field => `e.${field}`).join(', ')} });`)}
+    }
+`;
+});
+
 export function generateDbContext(params: GenerateDbContextParams) {
   const template_text = readFileSync(join(__dirname, '..', 'templates', 'DbContext.cs.hbs')).toString();
   const template = Handlebars.compile(template_text);
