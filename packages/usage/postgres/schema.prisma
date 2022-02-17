@@ -40,3 +40,11 @@ model Comment {
 
   @@map("comment")
 }
+
+model ShardMap {
+  route       String
+  country     String
+  shard_index Int
+
+  @@id(fields: [route, country])
+}
