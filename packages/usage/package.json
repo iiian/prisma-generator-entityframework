@@ -5,6 +5,9 @@
   "main": "src/app.js",
   "license": "MIT",
   "scripts": {
+    "integration-tests": "run-script-os",
+    "integration-tests:windows": ".\\__scripts\\run-tests.ps1",
+    "integration-tests:default": "echo TODO",
     "migrate-tests": "npm run migrate-mysql-tests && npm run migrate-postgres-tests && npm run migrate-sqlserver-tests && npm run migrate-sqlite-tests",
     "migrate-mysql-tests": "npx prisma migrate dev --schema=mysql/schema.prisma --name=mysql-init",
     "migrate-postgres-tests": "npx prisma migrate dev --schema=postgres/schema.prisma --name=postgres-init",
