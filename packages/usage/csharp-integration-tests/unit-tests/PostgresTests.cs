@@ -77,6 +77,10 @@ namespace unit_tests {
         });
         client.SaveChanges();
       });
+      client = new PostgresClient();
+      client.ShardMap.Remove(shard.Entity);
+      client.SaveChanges();
+      Assert.AreEqual(client.ShardMap.Count(), 0);
     }
   }
 }

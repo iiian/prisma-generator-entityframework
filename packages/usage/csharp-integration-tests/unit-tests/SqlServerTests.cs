@@ -76,6 +76,8 @@ namespace unit_tests {
         });
         client.SaveChanges();
       });
+      client.ShardMap.Remove(shard.Entity);
+      client.SaveChanges();
     }
   }
 }

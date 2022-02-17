@@ -68,7 +68,6 @@ namespace unit_tests {
         shard_index = 7
       });
       client.SaveChanges();
-      Assert.IsTrue(client.ShardMap.First().country == "India" && client.ShardMap.First().route == "/users/me" && client.ShardMap.First().shard_index == 7);
       Assert.ThrowsException<InvalidOperationException>(() => {
         client.ShardMap.Add(new ShardMap{
           country = "India",
@@ -77,6 +76,10 @@ namespace unit_tests {
         });
         client.SaveChanges();
       });
+      client = new MysqlClient();
+      client.ShardMap.Remove(shard.Entity);
+      client.SaveChanges();
+      Assert.AreEqual(client.ShardMap.Count(), 0);
     }
   }
 }

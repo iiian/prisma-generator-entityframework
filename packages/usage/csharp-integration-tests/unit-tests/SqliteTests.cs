@@ -75,6 +75,9 @@ namespace unit_tests {
           shard_index = 7
         });
         client.SaveChanges();
+        client.ShardMap.Remove(shard.Entity);
+        client.SaveChanges();
+        Assert.AreEqual(client.ShardMap.Count(), 0);
       });
     }
   }
