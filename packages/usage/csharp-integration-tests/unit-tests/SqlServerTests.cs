@@ -1,5 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SqlServerTest;
+using System;
 using System.Linq;
 
 namespace unit_tests {
@@ -55,6 +56,27 @@ namespace unit_tests {
       Assert.IsTrue(client.User.Any(user => user.name == "Don Jones"));
       Assert.IsFalse(client.User.Any(user => user.email == "don.jones@gmail.com"));
       client.User.Remove(donJonesUser.Entity);
+      client.SaveChanges();
+    }
+
+    [TestMethod]
+    public void it_should_support_multi_field_primary_keys() {
+      SqlServerClient client = new SqlServerClient();
+      var shard = client.ShardMap.Add(new ShardMap {
+        country = "India",
+        route = "/users/me",
+        shard_index = 7
+      });
+      client.SaveChanges();
+      Assert.ThrowsException<InvalidOperationException>(() => {
+        client.ShardMap.Add(new ShardMap {
+          country = "India",
+          route = "/users/me",
+          shard_index = 7
+        });
+        client.SaveChanges();
+      });
+      client.ShardMap.Remove(shard.Entity);
       client.SaveChanges();
     }
   }

@@ -27,5 +27,19 @@ describe('generateDbContext', () => {
       expect(generateDbContext(args)).toMatchSnapshot();
     });
   });
+
+  describe('given a model with a multi-field primary key', () => {
+    it('should generate an OnModelCreatingMethod that configures the relevant primary key entity relation', async () => {
+      const { dmmf: sampleDMMF, sample_prisma_schema_path } = await getTestDMMF('multi-field-primary-key');
+      const args: GenerateDbContextParams = {
+        clientClassName: 'foo',
+        connectionString: 'bar',
+        dbHost: 'Sqlite',
+        namespace: 'baz',
+        models: sampleDMMF.datamodel.models
+      };
+      expect(generateDbContext(args)).toMatchSnapshot();
+    });
+  });
 });
 

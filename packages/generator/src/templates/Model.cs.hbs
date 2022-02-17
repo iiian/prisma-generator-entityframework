@@ -7,16 +7,10 @@ namespace {{namespace}} {
   public class {{model.name}} {
     {{#each model.fields}}
     {{#unless (isTruthy relationName)}}
-    {{#if isId}}
-    [Key]
-    {{/if}}
-    {{#if isRequired}}
-    [Required]
-    {{/if}}
     {{#isForeignKey . ../model/fields}}
     [ForeignKey("{{getForeignKey .. ../../model/fields}}")]
     {{/isForeignKey}}
-    [Column("{{getDbField name ../model.name ../raw_schema_lines}}")]
+    {{{getColumnAnnotation . ../model ../raw_schema_lines}}}
     {{/unless}}
     public {{{getCSType .}}} {{name}} { get; set; }
     {{/each}}

@@ -14,9 +14,6 @@ describe('generateModel', () => {
     });
     expect(models).toMatchSnapshot();
     const post_model = models.find(model => model.includes("public class Post"));
-    const shouldContainAnnotation =
-      post_model!.search(/\[Column\(\"creator_id\"\)\]\s+public int creatorId \{ get\; set\; \}/);
-    expect(shouldContainAnnotation).not.toBe(-1);
   });
 
   it('should generate Table names based on the @@map attribute or simply based on the model', async () => {
@@ -30,6 +27,5 @@ describe('generateModel', () => {
       return generateModel(args);
     });
     expect(model).toMatchSnapshot();
-    expect(model!.search(/\[Table\(\"NoAtAtMapAttribute\"\)\]\s+public class NoAtAtMapAttribute/)).not.toBe(-1);
   });
 }); 

@@ -1,5 +1,24 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`generateDbContext given a model with a multi-field primary key should generate an OnModelCreatingMethod that configures the relevant primary key entity relation 1`] = `
+"using Microsoft.EntityFrameworkCore;
+
+namespace baz {
+  public class foo: DbContext {
+    public DbSet<MultifieldPrimaryKey> MultifieldPrimaryKey { get; set; }
+    
+    protected override void OnModelCreating(ModelBuilder modelBuilder) {
+      modelBuilder.Entity<MultifieldPrimaryKey>()
+        .HasKey(e => new { e.key1, e.key2 });
+    }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
+        optionsBuilder.UseSqlite(@\\"bar\\");
+    }
+  }
+}"
+`;
+
 exports[`generateDbContext given a mysql db should generate the source text for a mysqlclient 1`] = `
 "using Microsoft.EntityFrameworkCore;
 
@@ -8,7 +27,7 @@ namespace Namespace {
     public DbSet<User> User { get; set; }
     public DbSet<Post> Post { get; set; }
     public DbSet<Comment> Comment { get; set; }
-
+    
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
         var connection_string = @\\"<CONNECTION-STRING-GOES-HERE>\\";
         optionsBuilder.UseMySql(connection_string, ServerVersion.AutoDetect(connection_string));
@@ -25,7 +44,7 @@ namespace Namespace {
     public DbSet<User> User { get; set; }
     public DbSet<Post> Post { get; set; }
     public DbSet<Comment> Comment { get; set; }
-
+    
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
         optionsBuilder.UseREGISTERED_DB_HOST_GOES_HERE(@\\"<CONNECTION-STRING-GOES-HERE>\\");
     }

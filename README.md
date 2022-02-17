@@ -114,7 +114,7 @@ The following table tracks feature availability. It's a good reference for verif
 | table/field mapping           | ✔️        | The system can detect `@map` and `@@map` annotations, and apply them accordingly.
 | array-type field mapping      | ✔️        | The system can detect whether a particular field is an array type.
 | `@id` mapping                 | ✔️        | The system can map a **primary key**.
-| multi-field `@id` mapping     | ❌        | The system cannot yet handle multi-field primary keys.
+| multi-field `@id` mapping     | ✔️        | The system can handle multi-field primary keys.
 | enums generation              | ❌        | The system cannot yet derive `enum`s.
 | property/class case formating | ❌        | The system cannot yet massage case conventions, ie `camelCase` to `PascalCase`.
 | `@default` annotation mapping | ❌        | The system cannot yet apply model annotations based on the `@default` field annotation.
