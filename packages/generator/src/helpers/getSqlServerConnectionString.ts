@@ -15,23 +15,25 @@ export function getSqlServerConnectionString(datasource: DataSource): string {
   let conn_str;
   if (config.hasOwnProperty('integratedsecurity')) {
     const db = config.initialcatalog ?? config.database;
-    const trust_cert = config.trustedcertificate;
+    const trustservercertificate = config.trustservercertificate ?? config.trustedcertificate;
 
     conn_str = `Server=${config.host};`;
     conn_str += (db && `Database=${db};`) || '';
     conn_str += `Integrated Security=${config.integratedsecurity};`;
-    conn_str += (trust_cert && `Trust Server Certificate=${trust_cert};`) || '';
+    conn_str += (trustservercertificate && `Trust Server Certificate=${trustservercertificate};`) || '';
   } else {
     const db = config.initialcatalog ?? config.database;
     const user = config.user ?? config.username;
     const pass = config.pass ?? config.password;
     const encrypt = config.encrypt ?? config.encrypted;
+    const trustservercertificate = config.trustservercertificate ?? config.trustedcertificate;
 
-    conn_str = `Host=${config.host};`;
+    conn_str = `Server=${config.host};`;
     conn_str += (db && `Database=${db};`) || '';
-    conn_str += (user && `Username=${user};`) || '';
+    conn_str += (user && `User=${user};`) || '';
     conn_str += (pass && `Password=${pass};`) || '';
     conn_str += (encrypt && `Encrypt=${encrypt};`) || '';
+    conn_str += (trustservercertificate && `Trust Server Certificate=${trustservercertificate}`) || '';
   }
   return conn_str;
   // const host_fmt: RegExp = /^sqlserver:\/\/(?<host>.*)(\:(?<port>\d{4,5}))?\;(database|Database|DATABASE)\=(?<initial_db>.*)\;(user|User|USER)\=(?<user>.*)\;(password|Password|PASSWORD)\=(?<password>.*)\;(encrypt|Encrypt|ENCRYPT)\=(?<encrypted>(true|false))(\;)?$/;

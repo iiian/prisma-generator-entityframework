@@ -7,7 +7,9 @@ generator cs {
 
 datasource db {
   provider = "sqlserver"
-  url      = "sqlserver://localhost;initialCatalog=master;integratedSecurity=true;trustServerCertificate=true;"
+  // to run on integrated security, use the following connection config:
+  // url      = "sqlserver://localhost;initialCatalog=master;integratedSecurity=true;trustServerCertificate=true;"
+  url      = "sqlserver://localhost;user=sa;password=iStH1sGooDeNouGhMicroSoFt;encrypt=false;trustServerCertificate=true;"
 }
 
 model User {

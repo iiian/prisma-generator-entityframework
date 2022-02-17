@@ -76,6 +76,21 @@ describe('getConnectionString', () => {
       expect(connection_string).toMatchSnapshot();
     });
   });
+  describe('given a sqlserver database connector', () => {
+    it('should transform the connection string', () => {
+      const connection_string = getConnectionString({
+        activeProvider: 'sqlserver',
+        config: {},
+        name: '',
+        provider: 'sqlserver',
+        url: {
+          fromEnvVar: null,
+          value: 'sqlserver://host:5432;Database=initial_db;user=user;PASSWORD=DANGER_PLAINTEXT;encrypt=false;trustServerCertificate=true'
+        }
+      });
+      expect(connection_string).toMatchSnapshot();
+    });
+  });
   describe('given a sqlserver database connector, with integrated security', () => {
     it('should transform the connection string', () => {
       const connection_string = getConnectionString({
