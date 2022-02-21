@@ -5,3 +5,9 @@ build
 pnpm-debug.log
 .env*
 packages/generator/README.md
+**/obj
+packages/usage/csharp-integration-tests/**/bin
+**/test.db*
+packages/usage/csharp-integration-tests/**/model
+packages/usage/csharp-integration-tests/.vs/
+packages/usage/prisma/migrations

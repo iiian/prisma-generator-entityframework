@@ -1,9 +1,9 @@
 import { generateAll } from '../helpers/generateAll';
-import { getSampleDMMF } from './__fixtures__/getSampleDMMF';
+import { getTestDMMF } from './__fixtures__/getTestDMMF';
 
 describe('generateAll', () => {
   it('should invoke generateModel for each model', async () => {
-    const { dmmf: sampleDMMF, sample_prisma_schema_path } = await getSampleDMMF();
+    const { dmmf: sampleDMMF, sample_prisma_schema_path } = await getTestDMMF();
 
     expect(generateAll({
       clientClassName: 'ExampleClient',

@@ -63,6 +63,17 @@ Console.WriteLine(context.User.Where(user => user.name == "John Doe").First().em
 // john.doe@gmail.com
 ```
 
+## Configuration
+
+Configuration is as simple as providing values for these four properties:
+
+| Property          | Type                                     | Description |
+|-------------------|------------------------------------------|-------------|
+| `provider`        | `"npx prisma-generator-entityframework"` | Tell `prisma` you want to use this generator.
+| `output`          | `string`: relative or absolute path      | Tell `prisma` where you want the source code to be dumped to.
+| `namespace`       | `string`                                 | Tell `prisma-generator-entityframework` what namespace to stick your client and model code in.
+| `clientClassName` | `string`                                 | Tell `prisma-generator-entityframework` what to name your `DbContext` subclass.
+
 ## Compatibility
 
 ### .NET support
@@ -79,10 +90,10 @@ Right now, the primary target is .NET core, version 5.0 and later. If ~~enough~~
 
 | Prisma connector  | Supported | .NET core provider mapping                                                                                         |
 |-------------------|-----------|--------------------------------------------------------------------------------------------------------------------|
-| sqlserver         | ✔️        | [Microsoft.EntityFrameworkCore.SqlServer](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.SqlServer/) |
 | postgres          | ✔️        | [Npgsql.EntityFrameworkCore.PostgreSQL](https://www.nuget.org/packages/Npgsql.EntityFrameworkCore.PostgreSQL/)     |
 | mysql             | ✔️        | [Pomelo.EntityFrameworkCore.MySql](https://www.nuget.org/packages/Pomelo.EntityFrameworkCore.MySql/)               |
 | sqlite            | ✔️        | [Microsoft.EntityFrameworkCore.Sqlite](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Sqlite/)       |
+| sqlserver         | ✔️        | [Microsoft.EntityFrameworkCore.SqlServer](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.SqlServer/) |
 | cockroachdb       | ❌        | -                                                                                                                  |
 | mongodb           | ❌        | -                                                                                                                  |
 
@@ -92,7 +103,7 @@ For more information on Prisma-supported database connectors, visit the [Prisma 
 
 ## Feature support
 
-Below is the list of features. It's a good reference for whether or not a schema will be able map without concern. Drop an issue if your feature isn't complete and you'd really like it to be.
+The following table tracks feature availability. It's a good reference for verifying whether your schema will output with the information you need. Drop an issue if you'd like to see a specific feature prioritizied.
 
 | Feature                       | Supported | Description 
 |-------------------------------|-----------|--------------------------------------------------------------------------------------------------------------------------------------------------
@@ -103,7 +114,7 @@ Below is the list of features. It's a good reference for whether or not a schema
 | table/field mapping           | ✔️        | The system can detect `@map` and `@@map` annotations, and apply them accordingly.
 | array-type field mapping      | ✔️        | The system can detect whether a particular field is an array type.
 | `@id` mapping                 | ✔️        | The system can map a **primary key**.
-| multi-field `@id` mapping     | ❌        | The system cannot yet handle multi-field primary keys.
+| multi-field `@id` mapping     | ✔️        | The system can handle multi-field primary keys.
 | enums generation              | ❌        | The system cannot yet derive `enum`s.
 | property/class case formating | ❌        | The system cannot yet massage case conventions, ie `camelCase` to `PascalCase`.
 | `@default` annotation mapping | ❌        | The system cannot yet apply model annotations based on the `@default` field annotation.

@@ -1,0 +1,52 @@
+generator cs {
+  provider        = "npx prisma-generator-entityframework"
+  output          = "../csharp-integration-tests/csharp-integration-tests/model/sqlserver"
+  namespace       = "SqlServerTest"
+  clientClassName = "SqlServerClient"
+}
+
+datasource db {
+  provider = "sqlserver"
+  // to run on integrated security, use the following connection config:
+  // url      = "sqlserver://localhost;initialCatalog=master;integratedSecurity=true;trustServerCertificate=true;"
+  url      = "sqlserver://localhost;user=sa;password=iStH1sGooDeNouGhMicroSoFt;encrypt=false;trustServerCertificate=true;"
+}
+
+model User {
+  id      Int       @id @default(autoincrement())
+  email   String    @unique
+  name    String?
+  posts   Post[]
+  comment Comment[]
+
+  @@map("system_user")
+}
+
+model Post {
+  id        Int       @id @default(autoincrement())
+  content   String
+  createdAt DateTime  @map("created_at")
+  creatorId Int       @map("creator_id")
+  createdBy User      @relation(fields: [creatorId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  comment   Comment[]
+
+  @@map("post")
+}
+
+model Comment {
+  id        Int  @id @default(autoincrement())
+  post      Post @relation(fields: [postId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  creator   User @relation(fields: [creatorId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  postId    Int  @map("post_id")
+  creatorId Int  @map("creator_id")
+
+  @@map("comment")
+}
+
+model ShardMap {
+  route       String
+  country     String
+  shard_index Int
+
+  @@id(fields: [route, country])
+}

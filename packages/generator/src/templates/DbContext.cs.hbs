@@ -5,9 +5,9 @@ namespace {{namespace}} {
     {{#each models}}
     public DbSet<{{name}}> {{name}} { get; set; }
     {{/each}}
-
+    {{{getOnModelCreatingMethod .}}}
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
-        optionsBuilder.Use{{dbHost}}(@"{{{connectionString}}}");
+        {{{onConfiguringBody .}}}
     }
   }
 }
