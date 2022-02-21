@@ -24,7 +24,7 @@
     "copy-readme:default": "cp ../../README.md README.md"
   },
   "dependencies": {
-    "@prisma/client": "3.7.0",
+    "@prisma/client": "3.9.2",
     "@prisma/generator-helper": "3.7.0",
     "@prisma/sdk": "3.7.0",
     "dotenv": "^16.0.0",
