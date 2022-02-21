@@ -1,0 +1,21 @@
+generator cs {
+  provider        = "npx prisma-generator-entityframework"
+  output          = "../types"
+  namespace       = "MyNamespace"
+  clientClassName = "DataDbContext"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = "postgresql://user:password@my_postgres_host.com:5432/initial_db"
+}
+
+// This test fixture exists to confirm that
+// an @@map attribute is not required to produce a Table annotation
+model MultifieldPrimaryKey {
+  key1 String
+  key2 String
+  data String
+
+  @@id([key1, key2])
+}

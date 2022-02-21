@@ -19,6 +19,7 @@ export type GenerateAllParams = {
   connectionString: string;
   dbHost: string;
   datamodel: DMMF.Datamodel;
+  schema_file_path: string;
 };
 
 export function generateAll(params: GenerateAllParams): GenerateAllResult {
@@ -34,6 +35,7 @@ export function generateAll(params: GenerateAllParams): GenerateAllResult {
     name: `${model.name}.cs`,
     text: generateModel({
       namespace: params.namespace,
+      schema_file_path: params.schema_file_path,
       model,
     })
   }));

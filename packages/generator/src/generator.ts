@@ -2,6 +2,7 @@ import { DataSource, generatorHandler, GeneratorOptions } from '@prisma/generato
 import { logger } from '@prisma/sdk';
 import path from 'path';
 import { GENERATOR_NAME } from './constants';
+import { getConnectionString } from './helpers/getConnectionString';
 import { generateAll } from './helpers/generateAll';
 import { writeFileSafely } from './utils/writeFileSafely';
 
@@ -9,7 +10,7 @@ const { version } = require('../package.json');
 
 generatorHandler({
   onManifest() {
-    logger.info(`${GENERATOR_NAME}:Registered`);
+    logger.info(`${GENERATOR_NAME}@${version}:Registered`);
     return {
       version,
       defaultOutput: '../generated',
@@ -34,6 +35,7 @@ generatorHandler({
       namespace,
       connectionString: getConnectionString(options.datasources?.[0]),
       dbHost: getDbHost(options.datasources?.[0]),
+      schema_file_path: options.schemaPath,
       datamodel: options.dmmf.datamodel
     });
     logger.info(`Compiled.`);
@@ -59,22 +61,7 @@ generatorHandler({
     }
   },
 });
-export function getConnectionString(datasource: DataSource): string {
-  if (!datasource) {
-    throw new Error('No datasource specified. I need a datasource in order to construct the DbContext. The DbContext will need to setup the connection in the `OnConfiguring` life cycle hook.');
-  }
-  const conn_str_fmt: RegExp = /\w+:\/\/((?<user>.*)\:(?<password>.*)@)?(?<host>.*)\:(?<port>\d{4,5})(\/(?<initial_db>.*))?/;
-  const raw_conn_str = (datasource.url.fromEnvVar) ? process.env[datasource.url.fromEnvVar]! : datasource.url.value;
-  const matches = conn_str_fmt.exec(raw_conn_str);
-  logger.info(matches);
-  if (!matches) {
-    throw new Error(`Connection string could not be parsed: ${raw_conn_str}`);
-  }
-  return `Host=${matches!.groups!.host!};Database=${matches!.groups!.initial_db!};Username=${matches!.groups!.user!};Password=${matches!.groups!.password!}`;
-}
-
 export function getDbHost(datasource: DataSource): string {
-  logger.info(JSON.stringify(datasource));
   if (!datasource) {
     throw new Error('No datasource specified. I need a datasource in order to construct the DbContext. The DbContext will need to setup the connection in the `OnConfiguring` life cycle hook.');
   }

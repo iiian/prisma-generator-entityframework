@@ -1,5 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`generateModel should generate Table names based on the @@map attribute or simply based on the model 1`] = `
+"using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Foo {
+  [Table(\\"NoAtAtMapAttribute\\")]
+  public class NoAtAtMapAttribute {
+    [Key, Required, Column]
+    public int id { get; set; }
+  }
+}"
+`;
+
 exports[`generateModel should generate the source text for a model 1`] = `
 Array [
   "using System;
@@ -9,21 +23,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace ProcessingFramework {
   [Table(\\"user\\")]
   public class User {
-    [Key]
-    [Required]
-    [Column(\\"id\\")]
+    [Key, Required, Column]
     public int id { get; set; }
-    [Required]
-    [Column(\\"email\\")]
+    [Required, Column]
     public  string email { get; set; }
-    [Column(\\"name\\")]
+    [Column]
     public  string name { get; set; }
-    [Required]
-    [Column(\\"posts\\")]
-    public Post posts { get; set; }
-    [Required]
-    [Column(\\"comment\\")]
-    public Comment comment { get; set; }
+    public ICollection<Post> posts { get; set; }
+    public ICollection<Comment> comment { get; set; }
   }
 }",
   "using System;
@@ -33,26 +40,17 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace ProcessingFramework {
   [Table(\\"post\\")]
   public class Post {
-    [Key]
-    [Required]
-    [Column(\\"id\\")]
+    [Key, Required, Column]
     public int id { get; set; }
-    [Required]
-    [Column(\\"content\\")]
+    [Required, Column]
     public  string content { get; set; }
-    [Required]
-    [Column(\\"createdAt\\")]
+    [Required, Column(\\"created_at\\")]
     public DateTime createdAt { get; set; }
-    [Required]
     [ForeignKey(\\"createdBy\\")]
-    [Column(\\"creatorId\\")]
+    [Required, Column(\\"creator_id\\")]
     public int creatorId { get; set; }
-    [Required]
-    [Column(\\"createdBy\\")]
     public User createdBy { get; set; }
-    [Required]
-    [Column(\\"comment\\")]
-    public Comment comment { get; set; }
+    public ICollection<Comment> comment { get; set; }
   }
 }",
   "using System;
@@ -62,23 +60,15 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace ProcessingFramework {
   [Table(\\"comment\\")]
   public class Comment {
-    [Key]
-    [Required]
-    [Column(\\"id\\")]
+    [Key, Required, Column]
     public int id { get; set; }
-    [Required]
-    [Column(\\"post\\")]
     public Post post { get; set; }
-    [Required]
-    [Column(\\"creator\\")]
     public User creator { get; set; }
-    [Required]
     [ForeignKey(\\"post\\")]
-    [Column(\\"postId\\")]
+    [Required, Column(\\"post_id\\")]
     public int postId { get; set; }
-    [Required]
     [ForeignKey(\\"creator\\")]
-    [Column(\\"creatorId\\")]
+    [Required, Column(\\"creator_id\\")]
     public int creatorId { get; set; }
   }
 }",
