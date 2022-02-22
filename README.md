@@ -118,7 +118,7 @@ The following table tracks feature availability. It's a good reference for verif
 | array-type field mapping             | ✔️        | The system can detect whether a particular field is an array type.
 | `@id` mapping                        | ✔️        | The system can map a **primary key**.
 | multi-field `@id` mapping            | ✔️        | The system can handle multi-field primary keys.
-| `@default(uuid()) annotation mapping | ✔️        | The system can specify a limited set of default values for primary key types: integer && string `uuid`.
+| `@default(uuid())` annotation mapping | ✔️        | The system can specify a limited set of default values for primary key types: integer && string `uuid`.
 | `@db.UniqueIdentifier`, `@db.Uuid`   | ✔️        | The system can handle system-specific UUID (aka GUID) types.
 | `Json` type mapping                  | ❌        | The system cannot yet map the `Json` type.
 | `Bytes` type mapping                 | ❌        | " " "
