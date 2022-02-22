@@ -1,0 +1,18 @@
+generator cs {
+  provider        = "npx prisma-generator-entityframework"
+  output          = "../csharp-integration-tests/csharp-integration-tests/model/postgres"
+  namespace       = "PostgresTest"
+  clientClassName = "PostgresClient"
+}
+
+datasource db {
+  provider = "sqlserver"
+  url      = "postgresql://postgres:password@localhost:5432/postgres"
+}
+
+model SqlServerDbUuidType {
+  id   String @id @default(uuid()) @db.UniqueIdentifier
+  data Int
+
+  @@map("sqlserver_db_uuid_type")
+}

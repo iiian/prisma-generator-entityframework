@@ -1,5 +1,6 @@
 
-import { DMMF } from '@prisma/generator-helper';
+import { DataSource, DMMF } from '@prisma/generator-helper';
+import { SupportedConnector as SupportedConnector } from 'src/types';
 import { generateDbContext } from './generateDbContext';
 import { generateModel } from './generateModel';
 
@@ -18,6 +19,7 @@ export type GenerateAllParams = {
   clientClassName: string;
   connectionString: string;
   dbHost: string;
+  connector: SupportedConnector;
   datamodel: DMMF.Datamodel;
   schema_file_path: string;
 };
@@ -36,6 +38,7 @@ export function generateAll(params: GenerateAllParams): GenerateAllResult {
     text: generateModel({
       namespace: params.namespace,
       schema_file_path: params.schema_file_path,
+      connector: params.connector,
       model,
     })
   }));

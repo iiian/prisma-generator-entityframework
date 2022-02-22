@@ -2,6 +2,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MysqlTest;
 using System;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace unit_tests {
   [TestClass]
@@ -80,6 +81,20 @@ namespace unit_tests {
       client.ShardMap.Remove(shard.Entity);
       client.SaveChanges();
       Assert.AreEqual(client.ShardMap.Count(), 0);
+    }
+
+    [TestMethod]
+    public void it_should_support_guids() {
+      var uuid_regex = new Regex(@"[a-f0-9]{8}\-[a-f0-9]{4}\-[a-f0-9]{4}\-[a-f0-9]{4}\-[a-f0-9]{12}");
+      MysqlClient client = new MysqlClient();
+      var text_uuid = client.TextUuidType.Add(new TextUuidType {
+        data = 2_000
+      });
+      client.SaveChanges();
+      Assert.IsNotNull(text_uuid.Entity.id);
+      Assert.IsTrue(uuid_regex.IsMatch(text_uuid.Entity.id.ToString()));
+      client.TextUuidType.Remove(text_uuid.Entity);
+      client.SaveChanges();
     }
   }
 }

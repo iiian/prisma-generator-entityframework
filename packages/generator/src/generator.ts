@@ -1,10 +1,12 @@
-import { DataSource, generatorHandler, GeneratorOptions } from '@prisma/generator-helper';
+import { generatorHandler, GeneratorOptions } from '@prisma/generator-helper';
 import { logger } from '@prisma/sdk';
 import path from 'path';
-import { GENERATOR_NAME } from './constants';
+import { ERR_CANNOT_SUPPORT_MONGODB, GENERATOR_NAME } from './constants';
 import { getConnectionString } from './helpers/getConnectionString';
 import { generateAll } from './helpers/generateAll';
 import { writeFileSafely } from './utils/writeFileSafely';
+import assert from 'assert';
+import { getDbHost } from './helpers/getDbHost';
 
 const { version } = require('../package.json');
 
@@ -30,11 +32,15 @@ generatorHandler({
     }
 
     logger.info(`Running generator`);
+
+    const connector = options.datasources?.[0].provider;
+    assert(connector !== 'mongodb', ERR_CANNOT_SUPPORT_MONGODB);
     const artifacts = generateAll({
       clientClassName,
       namespace,
       connectionString: getConnectionString(options.datasources?.[0]),
-      dbHost: getDbHost(options.datasources?.[0]),
+      connector,
+      dbHost: getDbHost(connector),
       schema_file_path: options.schemaPath,
       datamodel: options.dmmf.datamodel
     });
@@ -61,25 +67,4 @@ generatorHandler({
     }
   },
 });
-export function getDbHost(datasource: DataSource): string {
-  if (!datasource) {
-    throw new Error('No datasource specified. I need a datasource in order to construct the DbContext. The DbContext will need to setup the connection in the `OnConfiguring` life cycle hook.');
-  }
-
-  switch (datasource.provider) {
-    case 'sqlserver':
-      return 'SqlServer';
-    case 'mysql':
-      return 'MySql';
-    case 'postgres' as any:
-    case 'postgresql':
-      return 'Npgsql'; // the official microsoft entity framework documentation lists Npgsql as the preferred db provider for postgres
-    case 'sqlite':
-      return 'Sqlite';
-    case 'mongodb':
-      throw new Error('Mongodb is not supported by EntityFramework.');
-    default:
-      throw new Error(`${datasource.provider} is not supported by prisma-generate-entityframework.`);
-  }
-}
 

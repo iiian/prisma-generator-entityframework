@@ -12,7 +12,7 @@ namespace {{namespace}} {
     {{/isForeignKey}}
     {{{getColumnAnnotation . ../model ../raw_schema_lines}}}
     {{/unless}}
-    public {{{getCSType .}}} {{name}} { get; set; }
+    public {{{getCSType ../connector . ../model ../raw_schema_lines}}} {{name}} { get; set; }
     {{/each}}
   }
 }

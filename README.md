@@ -105,28 +105,30 @@ For more information on Prisma-supported database connectors, visit the [Prisma 
 
 The following table tracks feature availability. It's a good reference for verifying whether your schema will output with the information you need. Drop an issue if you'd like to see a specific feature prioritizied.
 
-| Feature                       | Supported | Description 
-|-------------------------------|-----------|--------------------------------------------------------------------------------------------------------------------------------------------------
-| model generation              | ✔️        | The system can generate basic models.
-| client generation             | ✔️        | The system can generate a basic client (`DbContext` in the `EntityFramework` world).
-| .env datasource               | ✔️        | The system can optionally configure the client from a `.env` file using the `env()` expression
-| relation generation           | ✔️        | The system can generate the code necessary to have object-to-object relations.
-| table/field mapping           | ✔️        | The system can detect `@map` and `@@map` annotations, and apply them accordingly.
-| array-type field mapping      | ✔️        | The system can detect whether a particular field is an array type.
-| `@id` mapping                 | ✔️        | The system can map a **primary key**.
-| multi-field `@id` mapping     | ✔️        | The system can handle multi-field primary keys.
-| enums generation              | ❌        | The system cannot yet derive `enum`s.
-| property/class case formating | ❌        | The system cannot yet massage case conventions, ie `camelCase` to `PascalCase`.
-| `@default` annotation mapping | ❌        | The system cannot yet apply model annotations based on the `@default` field annotation.
-| `@db*` annotation mapping     | ❌        | The system cannot yet apply model annotations based on the `@db.*` and `@dbgenerated` field annotations.
-| `@index` annotation mapping   | ❌        | " " "
-| `@ignore` annotation mapping  | ❌        | " " "
-| `uuid/cuid/autoincrement/now` | ❌        | " " "
-| nuget dependency detection    | ❌        | The system cannot yet autodetect that a nuget dependency is necessary to support the declared db provider.
-| `Json` type mapping           | ❌        | The system cannot yet map the `Json` type.
-| `Bytes` type mapping          | ❌        | " " "
-| `Unsupported` type mapping    | ❌        | " " "
-| schema model argument mapping | ❌        | The system cannot yet handle model argument mapping.
+| Feature                              | Supported | Description
+|--------------------------------------|-----------|--------------------------------------------------------------------------------------------------------------------------------------------------
+| model generation                     | ✔️        | The system can generate basic models.
+| client generation                    | ✔️        | The system can generate a basic client (`DbContext` in the `EntityFramework` world).
+| .env datasource                      | ✔️        | The system can optionally configure the client from a `.env` file using the `env()` expression
+| relation generation                  | ✔️        | The system can generate the code necessary to have object-to-object relations.
+| table/field mapping                  | ✔️        | The system can detect `@map` and `@@map` annotations, and apply them accordingly.
+| array-type field mapping             | ✔️        | The system can detect whether a particular field is an array type.
+| `@id` mapping                        | ✔️        | The system can map a **primary key**.
+| multi-field `@id` mapping            | ✔️        | The system can handle multi-field primary keys.
+| `@default(uuid()) annotation mapping | ✔️        | The system can specify a limited set of default values for primary key types: integer && string `uuid`.
+| `@db.UniqueIdentifier`, `@db.Uuid`   | ✔️        | The system can handle system-specific UUID (aka GUID) types.
+| `Json` type mapping                  | ❌        | The system cannot yet map the `Json` type.
+| `Bytes` type mapping                 | ❌        | " " "
+| `Unsupported` type mapping           | ❌        | " " "
+| `@default` annotation mapping        | ❌        | The system cannot yet apply the full range of model annotations based on the `@default` field annotation.
+| `@db*` annotation mapping            | ❌        | The system cannot yet apply the full range of model annotations based on the `@db.*` and `@dbgenerated` field annotations.
+| property/class case formating        | ❌        | The system cannot yet massage case conventions, ie `camelCase` to `PascalCase`.
+| `@index` annotation mapping          | ❌        | " " "
+| `@ignore` annotation mapping         | ❌        | " " "
+| `cuid/autoincrement/now`             | ❌        | " " ". Note that `uuid` is implemented for primary keys.
+| nuget dependency detection           | ❌        | The system cannot yet autodetect that a nuget dependency is necessary to support the declared db provider.
+| enums generation                     | ❌        | The system cannot yet derive `enum`s.
+| schema model argument mapping        | ❌        | The system cannot yet handle model argument mapping.
 
 ## Additional Links
 

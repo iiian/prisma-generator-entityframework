@@ -1,5 +1,85 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`generateModel given a string type for a primary key given a postgres connector given an @id @db.Uuid primary key should generate a model with \`Guid\` for the primary key 1`] = `
+"using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Foo {
+  [Table(\\"pg_db_uuid_type\\")]
+  public class PostgresDbUuidType {
+    [Key, Required, Column]
+    public Guid id { get; set; }
+    [Required, Column]
+    public int data { get; set; }
+  }
+}"
+`;
+
+exports[`generateModel given a string type for a primary key given a sqlserver connector given an @id @db.UniqueIdentifier primary key should generate a model with \`Guid\` for the primary key 1`] = `
+"using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Foo {
+  [Table(\\"sqlserver_db_uuid_type\\")]
+  public class SqlServerDbUuidType {
+    [Key, Required, Column]
+    public Guid id { get; set; }
+    [Required, Column]
+    public int data { get; set; }
+  }
+}"
+`;
+
+exports[`generateModel given a string type for a primary key otherwise should have a string primary key 1`] = `
+"using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Foo {
+  [Table(\\"sqlite_text_uuid_type\\")]
+  public class SqliteTextUuidType {
+    [Key, Required, Column]
+    public string id { get; set; }
+    [Required, Column]
+    public int data { get; set; }
+  }
+}"
+`;
+
+exports[`generateModel given a string type for a primary key otherwise should have a string primary key 2`] = `
+"using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Foo {
+  [Table(\\"sqlserver_text_uuid_type\\")]
+  public class SqlServerTextUuidType {
+    [Key, Required, Column]
+    public string id { get; set; }
+    [Required, Column]
+    public int data { get; set; }
+  }
+}"
+`;
+
+exports[`generateModel given a string type for a primary key otherwise should have a string primary key 3`] = `
+"using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Foo {
+  [Table(\\"pg_text_uuid_type\\")]
+  public class PostgresTextUuidType {
+    [Key, Required, Column]
+    public string id { get; set; }
+    [Required, Column]
+    public int data { get; set; }
+  }
+}"
+`;
+
 exports[`generateModel should generate Table names based on the @@map attribute or simply based on the model 1`] = `
 "using System;
 using System.ComponentModel.DataAnnotations;
@@ -26,9 +106,9 @@ namespace ProcessingFramework {
     [Key, Required, Column]
     public int id { get; set; }
     [Required, Column]
-    public  string email { get; set; }
+    public string email { get; set; }
     [Column]
-    public  string name { get; set; }
+    public string name { get; set; }
     public ICollection<Post> posts { get; set; }
     public ICollection<Comment> comment { get; set; }
   }
@@ -43,7 +123,7 @@ namespace ProcessingFramework {
     [Key, Required, Column]
     public int id { get; set; }
     [Required, Column]
-    public  string content { get; set; }
+    public string content { get; set; }
     [Required, Column(\\"created_at\\")]
     public DateTime createdAt { get; set; }
     [ForeignKey(\\"createdBy\\")]

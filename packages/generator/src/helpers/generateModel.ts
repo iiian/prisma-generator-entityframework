@@ -2,10 +2,14 @@ import { DMMF } from '@prisma/generator-helper';
 import { readFileSync } from 'fs';
 import * as Handlebars from 'handlebars';
 import { join } from 'path';
+import { SupportedConnector } from 'src/types';
+import { fieldIsGuidPrimaryKey } from './rawSchema/fieldIsGuidPrimaryKey';
+import { getMappedFieldName } from './rawSchema/getMappedFieldName';
 
 export type GenerateModelParams = {
   namespace: string;
   model: DMMF.Model;
+  connector: SupportedConnector;
   schema_file_path: string;
 };
 
@@ -28,7 +32,7 @@ Handlebars.registerHelper('getDbName', (model: DMMF.Model) => {
   return model.dbName ?? model.name;
 });
 
-Handlebars.registerHelper('getCSType', (field: DMMF.Field) => {
+Handlebars.registerHelper('getCSType', (connector: SupportedConnector, field: DMMF.Field, model: DMMF.Model, raw_schema_lines: string[]) => {
   let type: string;
   switch (field.type) {
     case 'Int': type = 'int'; break;
@@ -36,7 +40,14 @@ Handlebars.registerHelper('getCSType', (field: DMMF.Field) => {
     case 'Boolean': type = 'bool'; break;
     case 'Decimal':
     case 'Float': type = 'float'; break;
-    case 'String': type = ' string'; break;
+    case 'String': {
+      if (field.isId && fieldIsGuidPrimaryKey(connector, field, model, raw_schema_lines)) {
+        type = 'Guid';
+      } else {
+        type = 'string';
+      }
+      break;
+    };
     default: type = field.type as string; break;
   }
   if (field.isList) {
@@ -66,23 +77,9 @@ function isPrimaryKey(field: DMMF.Field, model: DMMF.Model) {
   return index >= 0;
 }
 
-function getMappedFieldName(field_name: string, model_name: string, raw_schema_lines: string[]) {
-  // required in order to differentiate fields w/ the same name on different models, which _could_ in theory be mapped to different
-  // field names on the db side.
-  const model_line_start = raw_schema_lines.findIndex(line => line.includes(`model ${model_name}`));
-
-  // get the first line on the model that matches the field
-  const line = raw_schema_lines.find((line, index) => new RegExp(`^\\s*${field_name}.*$`).test(line) && index > model_line_start)!;
-
-  // extract the @map("field") annotation, or default to the field_name
-  const db_field_name = /\@map\(\"(?<db_field_name>.*)\"\)/.exec(line)?.groups?.db_field_name ?? null;
-
-  return db_field_name;
-}
-
-export function generateModel({ model, namespace, schema_file_path }: GenerateModelParams): string {
+export function generateModel({ model, namespace, schema_file_path, connector }: GenerateModelParams): string {
   const template_text = readFileSync(join(__dirname, '..', 'templates', 'Model.cs.hbs')).toString();
   const template = Handlebars.compile(template_text);
   const raw_schema_lines = readFileSync(schema_file_path).toString().split(/[\r]?\n/).filter(Boolean);
-  return template({ namespace, model, raw_schema_lines });
+  return template({ namespace, model, raw_schema_lines, connector });
 }
