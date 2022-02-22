@@ -1,6 +1,20 @@
 using Microsoft.EntityFrameworkCore;
+{{#if (dbContextNeedsUUIDGenerator connector models raw_schema_lines)}}
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.EntityFrameworkCore.ValueGeneration;
+{{/if}}
 
 namespace {{namespace}} {
+  {{#if (dbContextNeedsUUIDGenerator connector models raw_schema_lines)}}
+  public class StringUUIDGenerator: ValueGenerator {
+    public override bool GeneratesTemporaryValues => false;
+
+    protected override object? NextValue(EntityEntry entry) {
+      return Guid.NewGuid().ToString();
+    }
+  }
+
+  {{/if}}
   public class {{clientClassName}}: DbContext {
     {{#each models}}
     public DbSet<{{name}}> {{name}} { get; set; }

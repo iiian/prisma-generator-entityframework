@@ -48,3 +48,17 @@ model ShardMap {
 
   @@id(fields: [route, country])
 }
+
+model DbUuidType {
+  id   String @id @default(uuid()) @db.Uuid
+  data Int
+
+  @@map("db_uuid_type")
+}
+
+model TextUuidType {
+  id   String @id @default(uuid())
+  data Int
+
+  @@map("text_uuid_type")
+}

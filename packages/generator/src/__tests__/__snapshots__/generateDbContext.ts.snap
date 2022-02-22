@@ -10,6 +10,7 @@ namespace baz {
     protected override void OnModelCreating(ModelBuilder modelBuilder) {
       modelBuilder.Entity<MultifieldPrimaryKey>()
         .HasKey(e => new { e.key1, e.key2 });
+      
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
@@ -28,9 +29,105 @@ namespace Namespace {
     public DbSet<Post> Post { get; set; }
     public DbSet<Comment> Comment { get; set; }
     
+    protected override void OnModelCreating(ModelBuilder modelBuilder) {
+      
+      modelBuilder.Entity<User>()
+        .Property(e => e.id)
+        .ValueGeneratedOnAdd();
+      modelBuilder.Entity<Post>()
+        .Property(e => e.id)
+        .ValueGeneratedOnAdd();
+      modelBuilder.Entity<Comment>()
+        .Property(e => e.id)
+        .ValueGeneratedOnAdd();
+    }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
         var connection_string = @\\"<CONNECTION-STRING-GOES-HERE>\\";
         optionsBuilder.UseMySql(connection_string, ServerVersion.AutoDetect(connection_string));
+    }
+  }
+}"
+`;
+
+exports[`generateDbContext given a postgres db given a \`String @id\` key with a \`@default(uuid())\` annotation _without_ the @db.Uuid annotation should create a manual StringUUIDGenerator extending ValueGenerator 1`] = `
+"using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.EntityFrameworkCore.ValueGeneration;
+
+namespace baz {
+  public class StringUUIDGenerator: ValueGenerator {
+    public override bool GeneratesTemporaryValues => false;
+
+    protected override object? NextValue(EntityEntry entry) {
+      return Guid.NewGuid().ToString();
+    }
+  }
+
+  public class foo: DbContext {
+    public DbSet<PostgresTextUuidType> PostgresTextUuidType { get; set; }
+    
+    protected override void OnModelCreating(ModelBuilder modelBuilder) {
+      
+      modelBuilder.Entity<PostgresTextUuidType>()
+        .Property(e => e.id)
+        .HasValueGenerator<StringUUIDGenerator>();
+    }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
+        optionsBuilder.UseNpgsql(@\\"bar\\");
+    }
+  }
+}"
+`;
+
+exports[`generateDbContext given a sqlserver db given a \`String @id\` key with a \`@default(uuid())\` annotation _without_ the @db.UniqueIdentifier annotation should create a manual StringUUIDGenerator extending ValueGenerator 1`] = `
+"using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.EntityFrameworkCore.ValueGeneration;
+
+namespace baz {
+  public class StringUUIDGenerator: ValueGenerator {
+    public override bool GeneratesTemporaryValues => false;
+
+    protected override object? NextValue(EntityEntry entry) {
+      return Guid.NewGuid().ToString();
+    }
+  }
+
+  public class foo: DbContext {
+    public DbSet<SqlServerTextUuidType> SqlServerTextUuidType { get; set; }
+    
+    protected override void OnModelCreating(ModelBuilder modelBuilder) {
+      
+      modelBuilder.Entity<SqlServerTextUuidType>()
+        .Property(e => e.id)
+        .HasValueGenerator<StringUUIDGenerator>();
+    }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
+        optionsBuilder.UseSqlServer(@\\"bar\\");
+    }
+  }
+}"
+`;
+
+exports[`generateDbContext given a sqlserver db given a \`String @id\` key with a \`@default(uuid())\` annotation should configure the key as being a database-generate uuid 1`] = `
+"using Microsoft.EntityFrameworkCore;
+
+namespace baz {
+  public class foo: DbContext {
+    public DbSet<SqlServerDbUuidType> SqlServerDbUuidType { get; set; }
+    
+    protected override void OnModelCreating(ModelBuilder modelBuilder) {
+      
+      modelBuilder.Entity<SqlServerDbUuidType>()
+        .Property(e => e.id)
+        .ValueGeneratedOnAdd();
+    }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
+        optionsBuilder.UseSqlServer(@\\"bar\\");
     }
   }
 }"
@@ -45,6 +142,19 @@ namespace Namespace {
     public DbSet<Post> Post { get; set; }
     public DbSet<Comment> Comment { get; set; }
     
+    protected override void OnModelCreating(ModelBuilder modelBuilder) {
+      
+      modelBuilder.Entity<User>()
+        .Property(e => e.id)
+        .ValueGeneratedOnAdd();
+      modelBuilder.Entity<Post>()
+        .Property(e => e.id)
+        .ValueGeneratedOnAdd();
+      modelBuilder.Entity<Comment>()
+        .Property(e => e.id)
+        .ValueGeneratedOnAdd();
+    }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
         optionsBuilder.UseREGISTERED_DB_HOST_GOES_HERE(@\\"<CONNECTION-STRING-GOES-HERE>\\");
     }

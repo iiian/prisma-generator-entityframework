@@ -1,0 +1,18 @@
+generator cs {
+  provider        = "npx prisma-generator-entityframework"
+  output          = "../csharp-integration-tests/csharp-integration-tests/model/postgres"
+  namespace       = "PostgresTest"
+  clientClassName = "PostgresClient"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:test.db"
+}
+
+model SqliteTextUuidType {
+  id   String @id @default(uuid())
+  data Int
+
+  @@map("sqlite_text_uuid_type")
+}
