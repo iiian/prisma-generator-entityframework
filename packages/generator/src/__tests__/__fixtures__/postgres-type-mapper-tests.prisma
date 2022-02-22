@@ -1,0 +1,73 @@
+generator cs {
+  provider        = "npx prisma-generator-entityframework"
+  output          = "../csharp-integration-tests/csharp-integration-tests/model/postgres"
+  namespace       = "PostgresTest"
+  clientClassName = "PostgresClient"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = "postgresql://postgres:password@localhost:5432/postgres"
+}
+
+model STRING__Inet_should_return_IPAddress {
+  id         Int    @id
+  test_field String @db.Inet
+}
+
+model STRING__Xml_should_return_string {
+  id         Int    @id
+  test_field String @db.Xml
+}
+
+model STRING__Uuid_should_return_Guid {
+  id         Int    @id
+  test_field String @db.Uuid
+}
+
+model STRING__Bit_should_return_BitArray__1 {
+  id         Int    @id
+  test_field String @db.Bit
+}
+
+model STRING__Bit_should_return_BitArray__2 {
+  id         Int    @id
+  test_field String @db.Bit()
+}
+
+model STRING__Bit_should_return_BitArray__3 {
+  id         Int    @id
+  test_field String @db.Bit(1)
+}
+
+model STRING__Bit_should_return_BitArray__4 {
+  id         Int    @id
+  test_field String @db.Bit(2)
+}
+
+model INTEGER__SmallInt_should_return_short {
+  id         Int @id
+  test_field Int @db.SmallInt
+}
+
+model INTEGER__Oid_should_return_uint {
+  id         Int @id
+  test_field Int @db.Oid
+}
+
+// -- tests for getTypeNameColumnAnnotation --
+model STRING__Bit_should_yield_bit {
+  id          Int    @id
+  test_field  String @db.Bit
+  test_field2 String @db.Bit(2)
+}
+
+model JSON__Json_should_yield_json {
+  id         Int  @id
+  test_field Json @db.Json
+}
+
+model JSON__Jsonb_should_yield_jsonb {
+  id         Int  @id
+  test_field Json @db.JsonB
+}

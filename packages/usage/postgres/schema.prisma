@@ -62,3 +62,17 @@ model TextUuidType {
 
   @@map("text_uuid_type")
 }
+
+model AllFieldsTest {
+  id      Int    @id @default(autoincrement())
+  ip_addr String @db.Inet
+  guid    String @db.Uuid
+  an_xml  String @db.Xml
+  a_short Int    @db.SmallInt
+  a_uint  Int    @db.Oid
+  bit_arr String @db.Bit(2)
+  uno_bit String @db.Bit
+  bytes   Bytes
+  json    Json   @db.Json
+  jsonb   Json   @db.JsonB
+}
