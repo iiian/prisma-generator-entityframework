@@ -94,9 +94,9 @@ Right now, the primary target is .NET core, version 5.0 and later. If ~~enough~~
 | mysql             | ✔️        | [Pomelo.EntityFrameworkCore.MySql](https://www.nuget.org/packages/Pomelo.EntityFrameworkCore.MySql/)               |
 | sqlite            | ✔️        | [Microsoft.EntityFrameworkCore.Sqlite](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Sqlite/)       |
 | sqlserver         | ✔️        | [Microsoft.EntityFrameworkCore.SqlServer](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.SqlServer/) |
-| cockroachdb       | ❌        | -                                                                                                                  |
+| cockroachdb       | ❌        | -*                                                                                                                  |
 | mongodb           | ❌        | -                                                                                                                  |
-
+* *It seems at least plausible to [support CockroachDB](https://www.cockroachlabs.com/docs/stable/build-a-csharp-app-with-cockroachdb.html), and given how compelling a product the CockroachLabs team have created, this should probably prioritized.*
 For more information on EntityFramework database provider support, visit the [DbContext configuration guide](https://docs.microsoft.com/en-us/ef/core/dbcontext-configuration/).
 
 For more information on Prisma-supported database connectors, visit the [Prisma database connector documentation](https://www.prisma.io/docs/concepts/database-connectors).
