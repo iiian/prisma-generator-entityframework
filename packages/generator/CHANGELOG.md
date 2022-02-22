@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/iiian/prisma-generator-entityframework/compare/v1.2.0...v1.3.0) (2022-02-22)
+
+
+### Features
+
+* support native and string based uuid types ([d58ab4f](https://github.com/iiian/prisma-generator-entityframework/commit/d58ab4fb819d65070ff6bd5b212b03cf8fca8659))
+
 # [1.2.0](https://github.com/iiian/prisma-generator-entityframework/compare/v1.1.2...v1.2.0) (2022-02-17)
 
 
