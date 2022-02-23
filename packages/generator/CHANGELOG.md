@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/iiian/prisma-generator-entityframework/compare/v1.3.0...v1.4.0) (2022-02-23)
+
+
+### Features
+
+* db annotations for postgres type ([4a216f1](https://github.com/iiian/prisma-generator-entityframework/commit/4a216f132f22a8684be0398ac0f13264f29c4746))
+
 # [1.3.0](https://github.com/iiian/prisma-generator-entityframework/compare/v1.2.0...v1.3.0) (2022-02-22)
 
 
