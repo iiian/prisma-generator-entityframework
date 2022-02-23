@@ -1,4 +1,6 @@
 using System;
+using System.Net;
+using System.Collections;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -10,7 +12,7 @@ namespace {{namespace}} {
     {{#isForeignKey . ../model/fields}}
     [ForeignKey("{{getForeignKey .. ../../model/fields}}")]
     {{/isForeignKey}}
-    {{{getColumnAnnotation . ../model ../raw_schema_lines}}}
+    {{{getColumnAnnotation ../connector . ../model ../raw_schema_lines}}}
     {{/unless}}
     public {{{getCSType ../connector . ../model ../raw_schema_lines}}} {{name}} { get; set; }
     {{/each}}

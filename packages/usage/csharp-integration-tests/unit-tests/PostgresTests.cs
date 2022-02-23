@@ -106,5 +106,25 @@ namespace unit_tests {
       client.DbUuidType.Remove(db_uuid.Entity);
       client.SaveChanges();
     }
+
+    [TestMethod]
+    public void it_should_support_special_fields() {
+      PostgresClient client = new PostgresClient();
+      var all_fields_test = client.AllFieldsTest.Add(new AllFieldsTest {
+        an_xml = "<xml></xml>",
+        a_short = 42,
+        a_uint = 43,
+        bit_arr = new System.Collections.BitArray(2, true),
+        uno_bit = new System.Collections.BitArray(1, false),
+        bytes = new byte[] { 0b_1011_1010 },
+        guid = Guid.NewGuid(),
+        ip_addr = System.Net.IPAddress.Loopback,
+        json = "{ \"hello\": \"world!\" }",
+        jsonb = "{ \"solution\": \"sell-low, buy-high\" }",
+      });
+      client.SaveChanges();
+      client.Remove(all_fields_test.Entity);
+      client.SaveChanges();
+    }
   }
 }

@@ -120,11 +120,12 @@ The following table tracks feature availability. It's a good reference for verif
 | multi-field `@id` mapping            | ✔️        | The system can handle multi-field primary keys.
 | `@default(uuid())` annotation mapping | ✔️        | The system can specify a limited set of default values for primary key types: integer && string `uuid`.
 | `@db.UniqueIdentifier`, `@db.Uuid`   | ✔️        | The system can handle system-specific UUID (aka GUID) types.
-| `Json` type mapping                  | ❌        | The system cannot yet map the `Json` type.
-| `Bytes` type mapping                 | ❌        | " " "
+| `@db*` annotation mapping (postgres) | ✔️        | The system can tell EntityFramework that your postgres `@db` annotations correspond to important underlying type mappings.
+| Basic `Json` type mapping            | ✔️        | The system can retrieve `Json` as a string type.**\***
+| `Bytes` type mapping                 | ✔️        | The system can handle the `Bytes` type as a `byte[]`
 | `Unsupported` type mapping           | ❌        | " " "
 | `@default` annotation mapping        | ❌        | The system cannot yet apply the full range of model annotations based on the `@default` field annotation.
-| `@db*` annotation mapping            | ❌        | The system cannot yet apply the full range of model annotations based on the `@db.*` and `@dbgenerated` field annotations.
+| `@db*` annotation mapping            | ❌        | The system cannot yet apply the full range of model annotations based on the `@db.*` and `@dbgenerated` field annotations, beyond postgres.
 | property/class case formating        | ❌        | The system cannot yet massage case conventions, ie `camelCase` to `PascalCase`.
 | `@index` annotation mapping          | ❌        | " " "
 | `@ignore` annotation mapping         | ❌        | " " "
@@ -132,6 +133,9 @@ The following table tracks feature availability. It's a good reference for verif
 | nuget dependency detection           | ❌        | The system cannot yet autodetect that a nuget dependency is necessary to support the declared db provider.
 | enums generation                     | ❌        | The system cannot yet derive `enum`s.
 | schema model argument mapping        | ❌        | The system cannot yet handle model argument mapping.
+
+
+\* *In the future, support may be added for extracting structured types out of `json` & `jsonb` fields.*
 
 ## Additional Links
 

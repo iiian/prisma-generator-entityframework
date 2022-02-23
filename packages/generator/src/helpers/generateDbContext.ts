@@ -3,7 +3,7 @@ import { readFileSync } from 'fs';
 import * as Handlebars from 'handlebars';
 import { join } from 'path';
 import { SupportedConnector } from '../types';
-import { modelNeedsManualUuidGeneration } from './rawSchema/modelNeedsManualUuidGeneration';
+import { TypeMapperFactory } from './connnector-specs/TypeMapperFactory';
 
 export type GenerateDbContextParams = {
   clientClassName: string;
@@ -24,7 +24,7 @@ Handlebars.registerHelper('onConfiguringBody', (params: GenerateDbContextParams)
 });
 
 Handlebars.registerHelper('dbContextNeedsUUIDGenerator', (connector: SupportedConnector, models: DMMF.Model[], raw_schema_lines: string[]): boolean => {
-  return models.some(model => modelNeedsManualUuidGeneration(connector, model, raw_schema_lines));
+  return models.some(model => TypeMapperFactory.create(connector).modelNeedsManualUuidGeneration(model, raw_schema_lines));
 });
 
 Handlebars.registerHelper('getOnModelCreatingMethod', (params: GenerateDbContextParams & { raw_schema_lines: string[]; }) => {
@@ -35,7 +35,7 @@ Handlebars.registerHelper('getOnModelCreatingMethod', (params: GenerateDbContext
   const manual_uuid_entities = params.models
     .filter(model => !!model.fields.find(f => f.isId))
     .map(model => {
-      const is_manual = modelNeedsManualUuidGeneration(params.connector, model, params.raw_schema_lines);
+      const is_manual = TypeMapperFactory.create(params.connector).modelNeedsManualUuidGeneration(model, params.raw_schema_lines);
 
       return { entity: model, is_manual, id_name: model.fields.find(f => f.isId)?.name };
     });
