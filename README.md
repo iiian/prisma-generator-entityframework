@@ -1,3 +1,12 @@
+# A note of forewarning to the would-be user...
+
+_This was a failure. I'm making a note here: huge regret. It's hard to overstate my **dis**satisfaction._ :cake:
+
+So, I started to build this thinking "man, it really sucks that you can't create an EntityFramework client from a Prisma schema." Except I'm frequently incorrect on things, and oh by the way yes, yes you totally can create an EntityFramework client from Prisma, and without any code in-between. [Here's an article on using prisma migrate to deploy your schema, and using the dotnet cli's entityframework introspection features to much more natively produce a client.](https://dev.to/prisma/database-migrations-for-net-and-entity-framework-with-prisma-49e0).
+
+🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧
+-----------------------------------------------------------
+
 > Shout out to @YassinEldeeb for building the awesome bootstrap project [create-prisma-generator](https://github.com/YassinEldeeb/create-prisma-generator). Without it, this would have taken significantly more time to get into a deployable state.
 
 # prisma-generator-entityframework
