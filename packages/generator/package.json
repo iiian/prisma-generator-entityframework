@@ -38,7 +38,7 @@
     "@types/node": "17.0.18",
     "@types/prettier": "2.4.2",
     "jest": "27.4.3",
-    "prisma": "3.7.0",
+    "prisma": "3.15.0",
     "run-script-os": "^1.1.6",
     "semantic-release": "^19.0.2",
     "ts-jest": "27.1.3",
